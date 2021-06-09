@@ -8,7 +8,7 @@ import javax.persistence.Id;
 public class Company {
     @Id
     @GeneratedValue
-    private int id;
+    private Integer id;
 
     private String name;
     private String owner;
@@ -20,7 +20,7 @@ public class Company {
         this.owner = owner;
     }
 
-    public int getId(){
+    public Integer getId(){
         return id;
     }
 
