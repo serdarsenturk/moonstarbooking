@@ -1,5 +1,7 @@
-package com.serdarsenturk.moonstarbooking;
+package com.serdarsenturk.moonstarbooking.data.entity;
 
+import com.serdarsenturk.moonstarbooking.data.entity.Company;
+import com.serdarsenturk.moonstarbooking.data.entity.CompanyRepository;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyNotifier;
 import com.vaadin.flow.component.button.Button;

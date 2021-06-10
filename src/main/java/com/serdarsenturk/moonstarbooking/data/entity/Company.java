@@ -1,4 +1,4 @@
-package com.serdarsenturk.moonstarbooking;
+package com.serdarsenturk.moonstarbooking.data.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
