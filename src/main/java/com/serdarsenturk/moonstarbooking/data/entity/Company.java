@@ -44,4 +44,5 @@ public class Company {
     public String toString(){
         return String.format("Company[id=%d, name='%s', owner='%s']", id, name, owner);
     }
+
 }

@@ -11,6 +11,7 @@ import com.vaadin.flow.router.Route;
 @Route(value = "/", layout = MainView.class)
 @PageTitle("Hello World")
 public class HomeView extends HorizontalLayout {
+
     private TextField name;
     private Button sayHello;
 
@@ -24,4 +25,5 @@ public class HomeView extends HorizontalLayout {
             Notification.show("Hello " + name.getValue());
         });
     }
+
 }

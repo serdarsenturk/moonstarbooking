@@ -1,6 +1,5 @@
 package com.serdarsenturk.moonstarbooking.views;
 
-import com.serdarsenturk.moonstarbooking.data.entity.CompanyEditor;
 import com.serdarsenturk.moonstarbooking.views.admin.AdminView;
 import com.serdarsenturk.moonstarbooking.views.home.HomeView;
 import com.vaadin.flow.component.Component;
@@ -8,7 +7,6 @@ import com.vaadin.flow.component.ComponentUtil;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -54,9 +52,6 @@ public class MainView extends AppLayout {
         viewTitle = new H1();
         layout.add(viewTitle);
 
-        // A user icon
-        layout.add(new Image("images/user.svg", "Avatar"));
-
         return layout;
     }
 
@@ -83,7 +78,7 @@ public class MainView extends AppLayout {
 
     private Tabs createMenu() {
         final Tabs tabs = new Tabs();
-        tabs.setOrientation(Tabs.Orientation.VERTICAL);
+        tabs.setOrientation(Tabs.Orientation.HORIZONTAL);
         tabs.addThemeVariants(TabsVariant.LUMO_MINIMAL);
         tabs.setId("tabs");
         tabs.add(createMenuItems());

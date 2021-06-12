@@ -1,7 +1,6 @@
-package com.serdarsenturk.moonstarbooking.data.entity;
+package com.serdarsenturk.moonstarbooking.data.service;
 
 import com.serdarsenturk.moonstarbooking.data.entity.Company;
-import com.serdarsenturk.moonstarbooking.data.entity.CompanyRepository;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyNotifier;
 import com.vaadin.flow.component.button.Button;
@@ -13,7 +12,6 @@ import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
 import org.springframework.beans.factory.annotation.Autowired;
-
 
 @SpringComponent
 @UIScope
@@ -94,6 +92,5 @@ public class CompanyEditor extends VerticalLayout implements KeyNotifier {
     public void setChangeHandler(ChangeHandler h){
         changeHandler = h;
     }
-
 
 }
