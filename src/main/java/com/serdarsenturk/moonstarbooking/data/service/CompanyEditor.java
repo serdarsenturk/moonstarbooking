@@ -1,6 +1,7 @@
 package com.serdarsenturk.moonstarbooking.data.service;
 
 import com.serdarsenturk.moonstarbooking.data.entity.Company;
+import com.serdarsenturk.moonstarbooking.data.repository.ICompanyRepository;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyNotifier;
 import com.vaadin.flow.component.button.Button;
@@ -16,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @SpringComponent
 @UIScope
 public class CompanyEditor extends VerticalLayout implements KeyNotifier {
-    private final CompanyRepository repository;
+    private final ICompanyRepository repository;
 
     private Company company;
 
@@ -33,7 +34,7 @@ public class CompanyEditor extends VerticalLayout implements KeyNotifier {
     private ChangeHandler changeHandler;
 
     @Autowired
-    public CompanyEditor(CompanyRepository repository){
+    public CompanyEditor(ICompanyRepository repository){
         this.repository = repository;
         add(name, owner, actions);
 
