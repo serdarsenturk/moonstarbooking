@@ -2,6 +2,7 @@ package com.serdarsenturk.moonstarbooking.views.admin;
 
 import com.serdarsenturk.moonstarbooking.views.company.CompanyView;
 import com.serdarsenturk.moonstarbooking.views.home.HomeView;
+import com.serdarsenturk.moonstarbooking.views.passenger.PassengerView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentUtil;
 import com.vaadin.flow.component.applayout.AppLayout;
@@ -64,7 +65,7 @@ public class AdminView extends AppLayout {
     }
 
     private static Tab[] getAvailableTabs() {
-        return new Tab[]{createTab("Home", HomeView.class), createTab("Companies", CompanyView.class)};
+        return new Tab[]{createTab("Home", HomeView.class), createTab("Companies", CompanyView.class), createTab("Passengers", PassengerView.class)};
     }
 
     private static Tab createTab(String text, Class<? extends Component> navigationTarget) {
