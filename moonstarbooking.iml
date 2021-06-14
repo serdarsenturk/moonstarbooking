@@ -253,6 +253,7 @@
     <orderEntry type="library" name="Maven: org.webjars.bowergithub.vaadin:vaadin-list-mixin:2.5.1" level="project" />
     <orderEntry type="library" name="Maven: com.vaadin:vaadin-rich-text-editor-flow:14.6.2" level="project" />
     <orderEntry type="library" name="Maven: com.vaadin.webjar:vaadin-rich-text-editor:1.3.0" level="project" />
+    <orderEntry type="library" name="Maven: org.vaadin.artur:a-vaadin-helper:1.6.2" level="project" />
   </component>
   <component name="designer2.settings">
     <option name="lastJavaLocation" value="$MODULE_DIR$/node_modules" />

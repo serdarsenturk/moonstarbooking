@@ -48,6 +48,11 @@
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.vaadin.artur</groupId>
+			<artifactId>a-vaadin-helper</artifactId>
+			<version>1.6.2</version>
+		</dependency>
 	</dependencies>
 
 	<!-- tag::bom[] -->
