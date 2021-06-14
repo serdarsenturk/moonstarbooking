@@ -1,4 +1,4 @@
-package com.serdarsenturk.moonstarbooking.views;
+package com.serdarsenturk.moonstarbooking.views.main;
 
 import com.serdarsenturk.moonstarbooking.views.admin.AdminView;
 import com.serdarsenturk.moonstarbooking.views.home.HomeView;
