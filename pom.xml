@@ -15,7 +15,7 @@
 	<description>A web programming project</description>
 	<properties>
 		<java.version>11</java.version>
-		<vaadin.version>14.5.3</vaadin.version>
+		<vaadin.version>14.6.2</vaadin.version>
 	</properties>
 	<dependencies>
 		<dependency>
