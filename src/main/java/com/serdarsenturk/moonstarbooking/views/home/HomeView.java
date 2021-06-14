@@ -1,6 +1,6 @@
 package com.serdarsenturk.moonstarbooking.views.home;
 
-import com.serdarsenturk.moonstarbooking.views.MainView;
+import com.serdarsenturk.moonstarbooking.views.main.MainView;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
