@@ -1,5 +1,6 @@
 package com.serdarsenturk.moonstarbooking.views.admin;
 
+import com.serdarsenturk.moonstarbooking.views.aircraft.AircraftView;
 import com.serdarsenturk.moonstarbooking.views.company.CompanyView;
 import com.serdarsenturk.moonstarbooking.views.home.HomeView;
 import com.serdarsenturk.moonstarbooking.views.passenger.PassengerView;
@@ -17,6 +18,7 @@ import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLink;
+import com.vaadin.flow.server.PWA;
 
 import java.util.Optional;
 
@@ -65,7 +67,7 @@ public class AdminView extends AppLayout {
     }
 
     private static Tab[] getAvailableTabs() {
-        return new Tab[]{createTab("Home", HomeView.class), createTab("Companies", CompanyView.class), createTab("Passengers", PassengerView.class)};
+        return new Tab[]{createTab("Home", HomeView.class), createTab("Companies", CompanyView.class), createTab("Passengers", PassengerView.class), createTab("Aircrafts", AircraftView.class)};
     }
 
     private static Tab createTab(String text, Class<? extends Component> navigationTarget) {
