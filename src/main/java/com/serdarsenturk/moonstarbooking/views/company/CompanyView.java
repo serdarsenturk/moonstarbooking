@@ -9,7 +9,6 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
@@ -28,8 +27,6 @@ public class CompanyView extends VerticalLayout {
 
     final TextField filter;
 
-    final Select<String> labelSelect;
-
     private final Button addNewBtn;
 
     public CompanyView(ICompanyRepository repo, CompanyEditor editor){
@@ -38,9 +35,8 @@ public class CompanyView extends VerticalLayout {
         this.grid = new Grid<>(Company.class);
         this.filter = new TextField();
         this.addNewBtn = new Button("New Company", VaadinIcon.PLUS.create());
-        this.labelSelect = new Select<>();
 
-        HorizontalLayout actions = new HorizontalLayout(filter, addNewBtn, labelSelect);
+        HorizontalLayout actions = new HorizontalLayout(filter, addNewBtn);
         add(actions, grid, editor);
 
         grid.setHeight("300px");
@@ -57,9 +53,6 @@ public class CompanyView extends VerticalLayout {
         });
 
         addNewBtn.addClickListener(e -> editor.editCompany(new Company("", "")));
-
-        labelSelect.setItems("Option one", "Option two");
-        labelSelect.setLabel("Label");
 
         editor.setChangeHandler(() -> {
             editor.setVisible(false);
