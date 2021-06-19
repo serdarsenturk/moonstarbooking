@@ -18,7 +18,6 @@ import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLink;
-import com.vaadin.flow.server.PWA;
 
 import java.util.Optional;
 
@@ -49,13 +48,14 @@ public class AdminView extends AppLayout {
         header.setClassName("topmenu-header");
         header.setPadding(false);
         header.setSpacing(false);
-        header.setWidthFull();
+        header.setWidth("%50");
         header.setAlignItems(FlexComponent.Alignment.CENTER);
 
-        Image logo = new Image("images/logo.png", "as logo");
-        logo.setId("logo");
-        header.add(logo);
-        header.add(new H1("Admin"));
+//        Image logo = new Image("images/logo.png", "as logo");
+//        logo.setId("logo");
+//        header.add(logo);
+//        header.add(new H1("Admin"));
+
         return header;
     }
 
