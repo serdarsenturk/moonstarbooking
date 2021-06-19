@@ -1,6 +1,5 @@
 package com.serdarsenturk.moonstarbooking.data.repository;
 
-import com.serdarsenturk.moonstarbooking.data.entity.Company;
 import com.serdarsenturk.moonstarbooking.data.entity.Passenger;
 import org.springframework.data.jpa.repository.JpaRepository;
 
