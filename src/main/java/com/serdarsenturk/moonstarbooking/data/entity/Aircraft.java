@@ -9,7 +9,7 @@ public class Aircraft{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @ManyToOne(targetEntity = Company.class)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "companyId")
     private Company company;
 
@@ -34,14 +34,17 @@ public class Aircraft{
         return company;
     }
 
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
     public void setCapacity(Integer capacity) {
         this.capacity = capacity;
     }
 
     @Override
     public String toString(){
-        return String.format("Aircraft[id=%d, capacity=%d]", id, capacity);
-
+        return String.format("Aircraft[id=%d, capacity=%d, companyId=%s]", id, capacity);
     }
 
 }
