@@ -68,10 +68,7 @@ public class AircraftView extends Div implements BeforeEnterObserver {
 
         // Configure Grid
         grid.addColumn("capacity").setAutoWidth(true);
-        grid.addColumn(aircraft -> {
-            Company company = aircraft.getCompany();
-            return company.getName();
-        }).setAutoWidth(true).setHeader("Company");
+        grid.addColumn("companyName").setAutoWidth(true);
 
         grid.addThemeVariants(GridVariant.LUMO_NO_BORDER);
         grid.setHeightFull();
