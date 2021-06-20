@@ -15,11 +15,14 @@ public class Aircraft{
 
     private Integer capacity;
 
+    private String companyName;
+
     public Aircraft(){}
 
     public Aircraft(Company company, Integer capacity) {
         this.company = company;
         this.capacity = capacity;
+        this.companyName = company.getName();
     }
 
     public Integer getId() {
@@ -40,6 +43,10 @@ public class Aircraft{
 
     public void setCapacity(Integer capacity) {
         this.capacity = capacity;
+    }
+
+    public String getCompanyName() {
+        return companyName;
     }
 
     @Override
