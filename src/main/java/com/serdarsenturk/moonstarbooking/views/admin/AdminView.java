@@ -1,14 +1,13 @@
 package com.serdarsenturk.moonstarbooking.views.admin;
 
 import com.serdarsenturk.moonstarbooking.views.aircraft.AircraftView;
+import com.serdarsenturk.moonstarbooking.views.airport.AirportView;
 import com.serdarsenturk.moonstarbooking.views.company.CompanyView;
 import com.serdarsenturk.moonstarbooking.views.home.HomeView;
 import com.serdarsenturk.moonstarbooking.views.passenger.PassengerView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentUtil;
 import com.vaadin.flow.component.applayout.AppLayout;
-import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -51,11 +50,6 @@ public class AdminView extends AppLayout {
         header.setWidth("%50");
         header.setAlignItems(FlexComponent.Alignment.CENTER);
 
-//        Image logo = new Image("images/logo.png", "as logo");
-//        logo.setId("logo");
-//        header.add(logo);
-//        header.add(new H1("Admin"));
-
         return header;
     }
 
@@ -67,7 +61,13 @@ public class AdminView extends AppLayout {
     }
 
     private static Tab[] getAvailableTabs() {
-        return new Tab[]{createTab("Home", HomeView.class), createTab("Companies", CompanyView.class), createTab("Passengers", PassengerView.class), createTab("Aircrafts", AircraftView.class)};
+        return new Tab[]{
+                createTab("Home", HomeView.class),
+                createTab("Companies", CompanyView.class),
+                createTab("Passengers", PassengerView.class),
+                createTab("Aircrafts", AircraftView.class),
+                createTab("Airports", AirportView.class)
+        };
     }
 
     private static Tab createTab(String text, Class<? extends Component> navigationTarget) {
