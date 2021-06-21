@@ -40,8 +40,7 @@ public class CompanyView extends VerticalLayout {
         add(actions, grid, editor);
 
         grid.setHeight("300px");
-        grid.setColumns("id", "name", "owner");
-        grid.getColumnByKey("id").setWidth("50px").setFlexGrow(0);
+        grid.setColumns("name", "owner");
 
         filter.setPlaceholder("Filter by name");
 
