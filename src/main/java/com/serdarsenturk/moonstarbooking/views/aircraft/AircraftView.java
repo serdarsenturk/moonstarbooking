@@ -53,6 +53,7 @@ public class AircraftView extends Div implements BeforeEnterObserver {
     private AircraftService aircraftService;
 
     private ICompanyRepository repository;
+
     public AircraftView(@Autowired AircraftService aircraftService, ICompanyRepository repository) {
         this.aircraftService = aircraftService;
         this.repository = repository;
