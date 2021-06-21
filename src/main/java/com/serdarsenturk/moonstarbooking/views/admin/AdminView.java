@@ -3,6 +3,7 @@ package com.serdarsenturk.moonstarbooking.views.admin;
 import com.serdarsenturk.moonstarbooking.views.aircraft.AircraftView;
 import com.serdarsenturk.moonstarbooking.views.airport.AirportView;
 import com.serdarsenturk.moonstarbooking.views.company.CompanyView;
+import com.serdarsenturk.moonstarbooking.views.flight.FlightView;
 import com.serdarsenturk.moonstarbooking.views.home.HomeView;
 import com.serdarsenturk.moonstarbooking.views.passenger.PassengerView;
 import com.vaadin.flow.component.Component;
@@ -63,10 +64,11 @@ public class AdminView extends AppLayout {
     private static Tab[] getAvailableTabs() {
         return new Tab[]{
                 createTab("Home", HomeView.class),
-                createTab("Companies", CompanyView.class),
+                createTab("Airports", AirportView.class),
                 createTab("Passengers", PassengerView.class),
+                createTab("Companies", CompanyView.class),
                 createTab("Aircrafts", AircraftView.class),
-                createTab("Airports", AirportView.class)
+                createTab("Flights", FlightView.class)
         };
     }
 
