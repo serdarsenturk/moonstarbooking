@@ -2,6 +2,7 @@ package com.serdarsenturk.moonstarbooking.views.admin;
 
 import com.serdarsenturk.moonstarbooking.views.aircraft.AircraftView;
 import com.serdarsenturk.moonstarbooking.views.airport.AirportView;
+import com.serdarsenturk.moonstarbooking.views.checkIn.CheckInView;
 import com.serdarsenturk.moonstarbooking.views.company.CompanyView;
 import com.serdarsenturk.moonstarbooking.views.flight.FlightView;
 import com.serdarsenturk.moonstarbooking.views.home.HomeView;
@@ -68,7 +69,8 @@ public class AdminView extends AppLayout {
                 createTab("Passengers", PassengerView.class),
                 createTab("Companies", CompanyView.class),
                 createTab("Aircrafts", AircraftView.class),
-                createTab("Flights", FlightView.class)
+                createTab("Flights", FlightView.class),
+                createTab("Checkins", CheckInView.class)
         };
     }
 
