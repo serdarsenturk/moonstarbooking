@@ -14,36 +14,36 @@ public class Flight {
     @JoinColumn(name = "aircraft_id")
     private Aircraft aircraft;
 
-    private String flight_code;
+    private String flightCode;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "from_airport_id")
-    private Airport from_airport;
+    private Airport fromAirport;
 
-    private String from_airport_name;
+    private String fromAirportName;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "to_airport_id")
-    private Airport to_airport;
+    private Airport toAirport;
 
-    private String to_airport_name;
+    private String toAirportName;
 
-    private LocalDate departure_date;
+    private LocalDate departureDate;
 
-    private LocalDate arrival_date;
+    private LocalDate arrivalDate;
 
     private Integer cost;
 
     public Flight(){}
 
-    public Flight(String flight_code, LocalDate departure_date, LocalDate arrival_date, Integer cost, Aircraft aircraft, Airport from_airport, Airport to_airport){
-        this.flight_code = flight_code;
-        this.departure_date = departure_date;
-        this.arrival_date = arrival_date;
+    public Flight(String flightCode, LocalDate departureDate, LocalDate arrivalDate, Integer cost, Aircraft aircraft, Airport fromAirport, Airport toAirport){
+        this.flightCode = flightCode;
+        this.departureDate = departureDate;
+        this.arrivalDate = arrivalDate;
         this.cost = cost;
         this.aircraft = aircraft;
-        this.from_airport_name = from_airport.getName();
-        this.to_airport_name = to_airport.getName();
+        this.fromAirportName = fromAirport.getName();
+        this.toAirportName = toAirport.getName();
     }
 
     public Integer getId() {
@@ -58,28 +58,28 @@ public class Flight {
         this.aircraft = aircraft;
     }
 
-    public String getFlight_code() {
-        return flight_code;
+    public String getFlightCode() {
+        return flightCode;
     }
 
-    public void setFlight_code(String flight_code) {
-        this.flight_code = flight_code;
+    public void setFlightCode(String flightCode) {
+        this.flightCode = flightCode;
     }
 
-    public LocalDate getDeparture_date() {
-        return departure_date;
+    public Airport getFromAirport() {
+        return fromAirport;
     }
 
-    public void setDeparture_date(LocalDate departure_date) {
-        this.departure_date = departure_date;
+    public void setFromAirport(Airport fromAirport) {
+        this.fromAirport = fromAirport;
     }
 
-    public LocalDate getArrival_date() {
-        return arrival_date;
+    public Airport getToAirport() {
+        return toAirport;
     }
 
-    public void setArrival_date(LocalDate arrival_date) {
-        this.arrival_date = arrival_date;
+    public void setToAirport(Airport toAirport) {
+        this.toAirport = toAirport;
     }
 
     public Integer getCost() {
@@ -90,31 +90,35 @@ public class Flight {
         this.cost = cost;
     }
 
-    public Airport getFrom_airport() {
-        return from_airport;
+    public String getFromAirportName() {
+        return fromAirportName;
     }
 
-    public void setFrom_airport(Airport from_airport) {
-        this.from_airport = from_airport;
+    public void setFromAirportName(String fromAirportName) {
+        this.fromAirportName = fromAirportName;
     }
 
-    public Airport getTo_airport() {
-        return to_airport;
+    public String getToAirportName() {
+        return toAirportName;
     }
 
-    public void setTo_airport(Airport to_airport) {
-        this.to_airport = to_airport;
+    public void setToAirportName(String toAirportName) {
+        this.toAirportName = toAirportName;
     }
 
-    public String getFrom_airport_name() {
-        return from_airport_name;
+    public LocalDate getArrivalDate() {
+        return arrivalDate;
     }
 
-    public String getTo_airport_name() {
-        return to_airport_name;
+    public void setArrivalDate(LocalDate arrivalDate) {
+        this.arrivalDate = arrivalDate;
     }
 
-    public void setTo_airport_name(String to_airport_name) {
-        this.to_airport_name = to_airport_name;
+    public LocalDate getDepartureDate() {
+        return departureDate;
+    }
+
+    public void setDepartureDate(LocalDate departureDate) {
+        this.departureDate = departureDate;
     }
 }
