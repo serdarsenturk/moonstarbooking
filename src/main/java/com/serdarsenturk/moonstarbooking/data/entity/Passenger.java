@@ -53,6 +53,6 @@ public class Passenger {
 
     @Override
     public String toString(){
-        return String.format("Passenger[id=%d, firstName='%s', lastName='%s', email='%s']", id, firstName, lastName, email);
+        return String.format("Passenger[firstName='%s', lastName='%s']", firstName, lastName);
     }
 }
