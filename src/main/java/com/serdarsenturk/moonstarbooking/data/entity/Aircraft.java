@@ -51,7 +51,7 @@ public class Aircraft{
 
     @Override
     public String toString(){
-        return String.format("Aircraft[id=%d, capacity=%d, companyId=%s]", id, capacity);
+        return String.format("Aircraft[id=%d, capacity=%d]", id, capacity);
     }
 
 }
