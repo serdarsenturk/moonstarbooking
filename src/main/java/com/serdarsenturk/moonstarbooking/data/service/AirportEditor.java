@@ -17,15 +17,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 @SpringComponent
 @UIScope
 public class AirportEditor extends VerticalLayout implements KeyNotifier {
-    private IAirportRepository repository;
+    private final IAirportRepository repository;
 
     private Airport airport;
 
     TextField name = new TextField("Name");
 
-    com.vaadin.flow.component.button.Button save = new com.vaadin.flow.component.button.Button("Save", VaadinIcon.CHECK.create());
-    com.vaadin.flow.component.button.Button cancel = new com.vaadin.flow.component.button.Button("Cancel");
-    com.vaadin.flow.component.button.Button delete = new Button("Delete", VaadinIcon.TRASH.create());
+     Button save = new com.vaadin.flow.component.button.Button("Save", VaadinIcon.CHECK.create());
+     Button cancel = new com.vaadin.flow.component.button.Button("Cancel");
+     Button delete = new Button("Delete", VaadinIcon.TRASH.create());
     HorizontalLayout actions = new HorizontalLayout(save, cancel, delete);
 
     Binder<Airport> binder = new Binder<>(Airport.class);
@@ -80,9 +80,10 @@ public class AirportEditor extends VerticalLayout implements KeyNotifier {
         else {
             airport = a;
         }
+
         cancel.setVisible(persisted);
 
-        binder.setBean(a);
+        binder.setBean(airport);
 
         setVisible(true);
 
