@@ -2,6 +2,7 @@ package com.serdarsenturk.moonstarbooking.data.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 public class Flight {
@@ -10,21 +11,21 @@ public class Flight {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "aircraft_id")
-    private Aircraft aircraft;
-
     private String flightCode;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "from_airport_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Aircraft aircraft;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     private Airport fromAirport;
 
-    private String fromAirportName;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "to_airport_id")
+    @ManyToOne(fetch = FetchType.LAZY)
     private Airport toAirport;
+
+    @OneToMany(mappedBy = "flight", cascade = CascadeType.ALL)
+    private List<CheckIn> checkIns;
+
+    private String fromAirportName;
 
     private String toAirportName;
 
@@ -32,16 +33,15 @@ public class Flight {
 
     private LocalDate arrivalDate;
 
-    private Integer cost;
-
     public Flight(){}
 
-    public Flight(String flightCode, LocalDate departureDate, LocalDate arrivalDate, Integer cost, Aircraft aircraft, Airport fromAirport, Airport toAirport){
+    public Flight(String flightCode, LocalDate departureDate, LocalDate arrivalDate, Aircraft aircraft, Airport fromAirport, Airport toAirport){
         this.flightCode = flightCode;
         this.departureDate = departureDate;
         this.arrivalDate = arrivalDate;
-        this.cost = cost;
         this.aircraft = aircraft;
+        this.fromAirport = fromAirport;
+        this.toAirport = toAirport;
         this.fromAirportName = fromAirport.getName();
         this.toAirportName = toAirport.getName();
     }
@@ -82,14 +82,6 @@ public class Flight {
         this.toAirport = toAirport;
     }
 
-    public Integer getCost() {
-        return cost;
-    }
-
-    public void setCost(Integer cost) {
-        this.cost = cost;
-    }
-
     public String getFromAirportName() {
         return fromAirportName;
     }
@@ -120,5 +112,13 @@ public class Flight {
 
     public void setDepartureDate(LocalDate departureDate) {
         this.departureDate = departureDate;
+    }
+
+    public List<CheckIn> getCheckIns() {
+        return checkIns;
+    }
+
+    public void setCheckIns(List<CheckIn> checkIns) {
+        this.checkIns = checkIns;
     }
 }
