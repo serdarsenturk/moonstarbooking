@@ -1,6 +1,7 @@
 package com.serdarsenturk.moonstarbooking.data.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Aircraft{
@@ -9,13 +10,15 @@ public class Aircraft{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "companyId")
+    @ManyToOne(fetch = FetchType.LAZY)
     private Company company;
 
     private Integer capacity;
 
     private String companyName;
+
+    @OneToMany(mappedBy = "aircraft", cascade = CascadeType.ALL)
+    private List<Flight> flights;
 
     public Aircraft(){}
 
@@ -47,6 +50,14 @@ public class Aircraft{
 
     public String getCompanyName() {
         return companyName;
+    }
+
+    public List<Flight> getFlights() {
+        return flights;
+    }
+
+    public void setFlights(List<Flight> flights) {
+        this.flights = flights;
     }
 
     @Override
