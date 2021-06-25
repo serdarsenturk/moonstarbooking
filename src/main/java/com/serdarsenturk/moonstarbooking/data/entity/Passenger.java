@@ -43,6 +43,14 @@ public class Passenger {
         this.email = email;
     }
 
+    public List<CheckIn> getCheckIns() {
+        return checkIns;
+    }
+
+    public void setCheckIns(List<CheckIn> checkIns) {
+        this.checkIns = checkIns;
+    }
+
     @Override
     public String toString(){
         return  name;
