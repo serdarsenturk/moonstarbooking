@@ -2,24 +2,23 @@ package com.serdarsenturk.moonstarbooking.data.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Passenger {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private String firstName;
-    private String lastName;
+    private String name;
     private String email;
 
     public Passenger(){}
 
-    public Passenger(String firstName, String lastName, String email){
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Passenger(String name, String email){
+        this.name = name;
         this.email = email;
     }
 
@@ -27,20 +26,12 @@ public class Passenger {
         return id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -53,6 +44,6 @@ public class Passenger {
 
     @Override
     public String toString(){
-        return String.format("Passenger[firstName='%s', lastName='%s']", firstName, lastName);
+        return String.format("Passenger[name='%s', email='%s']", name, email);
     }
 }
