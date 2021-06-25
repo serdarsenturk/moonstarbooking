@@ -7,7 +7,6 @@ import com.serdarsenturk.moonstarbooking.data.repository.IAircraftRepository;
 import com.serdarsenturk.moonstarbooking.data.repository.IAirportRepository;
 import com.serdarsenturk.moonstarbooking.data.service.FlightService;
 import com.serdarsenturk.moonstarbooking.views.admin.AdminView;
-import com.serdarsenturk.moonstarbooking.views.aircraft.AircraftView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.UI;
@@ -23,7 +22,6 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
-import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.ValidationException;
@@ -52,7 +50,6 @@ public class FlightView extends Div implements BeforeEnterObserver {
     private ComboBox<Airport> from_airport;
     private ComboBox<Airport> to_airport;
     private ComboBox<Aircraft> aircrafts;
-    private IntegerField cost;
 
     private Button cancel = new Button("Cancel");
     private Button save = new Button("Save");
@@ -73,7 +70,6 @@ public class FlightView extends Div implements BeforeEnterObserver {
         this.repository = repository;
         this.repository2 = repository2;
 
-        // Create UI
         SplitLayout splitLayout = new SplitLayout();
         splitLayout.setSizeFull();
 
@@ -82,13 +78,11 @@ public class FlightView extends Div implements BeforeEnterObserver {
 
         add(splitLayout);
 
-        // Configure Grid
         grid.addColumn("flightCode").setAutoWidth(true);
         grid.addColumn("toAirportName").setAutoWidth(true);
         grid.addColumn("fromAirportName").setAutoWidth(true);
         grid.addColumn("departureDate").setAutoWidth(true);
         grid.addColumn("arrivalDate").setAutoWidth(true);
-        grid.addColumn("cost").setAutoWidth(true);
 
         grid.addThemeVariants(GridVariant.LUMO_NO_BORDER);
         grid.setHeightFull();
@@ -97,16 +91,6 @@ public class FlightView extends Div implements BeforeEnterObserver {
                 PageRequest.of(query.getPage(), query.getPageSize(), VaadinSpringDataHelpers.toSpringDataSort(query)))
                 .stream()
         );
-
-        // when a row is selected or deselected, populate form
-        grid.asSingleSelect().addValueChangeListener(event -> {
-            if (event.getValue() != null) {
-                UI.getCurrent().navigate(String.format(FLIGHT_EDIT_ROUTE_TEMPLATE, event.getValue().getId()));
-            } else {
-                clearForm();
-                UI.getCurrent().navigate(AircraftView.class);
-            }
-        });
 
         grid.asSingleSelect().addValueChangeListener(event -> {
             if (event.getValue() != null) {
@@ -129,7 +113,7 @@ public class FlightView extends Div implements BeforeEnterObserver {
         save.addClickListener(e -> {
             try {
                 if (this.flight == null) {
-                    this.flight = new Flight(flight_code.getValue(), departure_date.getValue(), arrival_date.getValue(), cost.getValue(), aircrafts.getValue(), from_airport.getValue(), to_airport.getValue());
+                    this.flight = new Flight(flight_code.getValue(), departure_date.getValue(), arrival_date.getValue(), aircrafts.getValue(), from_airport.getValue(), to_airport.getValue());
                 }
                 binder.writeBean(this.flight);
 
@@ -141,6 +125,15 @@ public class FlightView extends Div implements BeforeEnterObserver {
             } catch (ValidationException validationException) {
                 Notification.show("An exception happened while trying to store the Flight details.");
             }
+        });
+
+        delete.addClickListener(e -> {
+            binder.readBean(this.flight);
+            flightService.delete(this.flight.getId());
+            clearForm();
+            refreshGrid();
+            Notification.show("Flight has deleted.");
+            UI.getCurrent().navigate(FlightView.class);
         });
     }
 
@@ -155,9 +148,6 @@ public class FlightView extends Div implements BeforeEnterObserver {
                 Notification.show(
                         String.format("The requested Flight was not found, ID = %d", flightId.get()), 3000,
                         Notification.Position.BOTTOM_START);
-
-                // when a row is selected but the data is no longer available,
-                // refresh grid
                 refreshGrid();
                 event.forwardTo(FlightView.class);
             }
@@ -175,7 +165,6 @@ public class FlightView extends Div implements BeforeEnterObserver {
 
         FormLayout formLayout = new FormLayout();
 
-        // Create Combo box
         to_airport = new ComboBox<>("To");
         to_airport.setItems(repository.findAll());
         to_airport.setItemLabelGenerator(Airport::getName);
@@ -191,10 +180,9 @@ public class FlightView extends Div implements BeforeEnterObserver {
         departure_date = new DatePicker("Departure Date");
         arrival_date = new DatePicker("Arrival Date");
 
-        cost = new IntegerField("Cost");
         flight_code = new TextField("Flight Code");
 
-        Component[] fields = new Component[]{flight_code, cost, departure_date, arrival_date, to_airport, from_airport, aircrafts};
+        Component[] fields = new Component[]{flight_code, departure_date, arrival_date, from_airport, to_airport,  aircrafts};
 
         for (Component field : fields) {
             ((HasStyle) field).addClassName("full-width");
