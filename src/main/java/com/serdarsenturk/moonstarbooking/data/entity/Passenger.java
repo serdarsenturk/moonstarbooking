@@ -1,9 +1,7 @@
 package com.serdarsenturk.moonstarbooking.data.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Passenger {
@@ -14,6 +12,9 @@ public class Passenger {
 
     private String name;
     private String email;
+
+    @OneToMany(mappedBy = "passenger", cascade = CascadeType.ALL)
+    private List<CheckIn> checkIns;
 
     public Passenger(){}
 
@@ -44,6 +45,6 @@ public class Passenger {
 
     @Override
     public String toString(){
-        return String.format("Passenger[name='%s', email='%s']", name, email);
+        return  name;
     }
 }
