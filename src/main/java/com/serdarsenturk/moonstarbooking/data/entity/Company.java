@@ -42,6 +42,14 @@ public class Company {
         this.owner = owner;
     }
 
+    public List<Aircraft> getAircrafts() {
+        return aircrafts;
+    }
+
+    public void setAircrafts(List<Aircraft> aircrafts) {
+        this.aircrafts = aircrafts;
+    }
+
     @Override
     public String toString(){
         return String.format("Company[id=%d, name='%s', owner='%s']", id, name, owner);
