@@ -170,7 +170,7 @@ public class CheckInView extends Div implements BeforeEnterObserver {
         FormLayout formLayout = new FormLayout();
 
         // Create Combo box
-        flights = new ComboBox<>("Flights");
+        flights = new ComboBox<>("Flight");
         flights.setItems(flightRepository.findAll());
         flights.setItemLabelGenerator(Flight::getFlightCode);
 
