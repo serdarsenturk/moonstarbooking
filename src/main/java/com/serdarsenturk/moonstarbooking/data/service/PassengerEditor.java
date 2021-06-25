@@ -21,8 +21,7 @@ public class PassengerEditor extends VerticalLayout implements KeyNotifier {
     private final IPassengerRepository repository;
     private Passenger passenger;
 
-    TextField fistName = new TextField("First Name");
-    TextField lastName = new TextField("Last Name");
+    TextField name = new TextField("Full Name");
     TextField email = new TextField("E-mail");
 
     Button save = new Button("Save", VaadinIcon.CHECK.create());
@@ -33,12 +32,12 @@ public class PassengerEditor extends VerticalLayout implements KeyNotifier {
 
     Binder<Passenger> binder = new Binder<>(Passenger.class);
 
-    private PassengerEditor.ChangeHandler changeHandler;
+    private ChangeHandler changeHandler;
 
     @Autowired
     public PassengerEditor(IPassengerRepository repository){
         this.repository = repository;
-        add(fistName, lastName, email, actions);
+        add(name, email, actions);
 
         binder.bindInstanceFields(this);
 
@@ -83,13 +82,14 @@ public class PassengerEditor extends VerticalLayout implements KeyNotifier {
         else {
             passenger = p;
         }
+
         cancel.setVisible(persisted);
 
         binder.setBean(passenger);
 
         setVisible(true);
 
-        fistName.focus();
+        name.focus();
     }
 
     public void setChangeHandler(ChangeHandler h){
