@@ -17,8 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 @SpringComponent
 @UIScope
 public class CompanyEditor extends VerticalLayout implements KeyNotifier {
-    private final ICompanyRepository repository;
 
+    private final ICompanyRepository repository;
     private Company company;
 
     TextField name = new TextField("Name");
@@ -81,6 +81,7 @@ public class CompanyEditor extends VerticalLayout implements KeyNotifier {
         else {
             company = c;
         }
+
         cancel.setVisible(persisted);
 
         binder.setBean(company);
