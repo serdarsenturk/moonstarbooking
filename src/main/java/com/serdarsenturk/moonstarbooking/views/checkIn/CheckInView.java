@@ -182,7 +182,7 @@ public class CheckInView extends Div implements BeforeEnterObserver {
 
         cost = new IntegerField("Cost");
 
-        Component[] fields = new Component[]{flights, passengers, cost, createdAt};
+        Component[] fields = new Component[]{cost, flights, passengers, createdAt};
 
         for (Component field : fields) {
             ((HasStyle) field).addClassName("full-width");
