@@ -66,7 +66,6 @@ public class CheckInView extends Div implements BeforeEnterObserver {
         this.flightRepository = flightRepository;
         this.passengerRepository = passengerRepository;
 
-        // Create UI
         SplitLayout splitLayout = new SplitLayout();
         splitLayout.setSizeFull();
 
@@ -75,8 +74,7 @@ public class CheckInView extends Div implements BeforeEnterObserver {
 
         add(splitLayout);
 
-        // Configure Grid
-        grid.addColumn("flight").setAutoWidth(true);
+        grid.addColumn("flightCode").setAutoWidth(true);
         grid.addColumn("passenger").setAutoWidth(true);
         grid.addColumn("createdAt").setAutoWidth(true);
         grid.addColumn("cost").setAutoWidth(true);
@@ -89,7 +87,6 @@ public class CheckInView extends Div implements BeforeEnterObserver {
                 .stream()
         );
 
-        // when a row is selected or deselected, populate form
         grid.asSingleSelect().addValueChangeListener(event -> {
             if (event.getValue() != null) {
                 UI.getCurrent().navigate(String.format(CHECKIN_EDIT_ROUTE_TEMPLATE, event.getValue().getId()));
@@ -120,7 +117,7 @@ public class CheckInView extends Div implements BeforeEnterObserver {
         save.addClickListener(e -> {
             try {
                 if (this.checkIn == null) {
-                    this.checkIn = new CheckIn();
+                    this.checkIn = new CheckIn(cost.getValue(), flights.getValue(), passengers.getValue(), createdAt.getValue());
                 }
                 binder.writeBean(this.checkIn);
 
@@ -132,6 +129,15 @@ public class CheckInView extends Div implements BeforeEnterObserver {
             } catch (ValidationException validationException) {
                 Notification.show("An exception happened while trying to store the checkIn details.");
             }
+        });
+
+        delete.addClickListener(e -> {
+            binder.readBean(this.checkIn);
+            checkInService.delete(this.checkIn.getId());
+            clearForm();
+            refreshGrid();
+            Notification.show("CheckIn has deleted.");
+            UI.getCurrent().navigate(CheckInView.class);
         });
     }
 
@@ -146,9 +152,6 @@ public class CheckInView extends Div implements BeforeEnterObserver {
                 Notification.show(
                         String.format("The requested CheckIn was not found, ID = %d", checkInId.get()), 3000,
                         Notification.Position.BOTTOM_START);
-
-                // when a row is selected but the data is no longer available,
-                // refresh grid
                 refreshGrid();
                 event.forwardTo(CheckInView.class);
             }
