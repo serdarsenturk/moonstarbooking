@@ -88,15 +88,6 @@ public class AircraftView extends Div implements BeforeEnterObserver {
             }
         });
 
-        grid.asSingleSelect().addValueChangeListener(event -> {
-            if (event.getValue() != null) {
-                UI.getCurrent().navigate(String.format(AIRCRAFT_EDIT_ROUTE_TEMPLATE, event.getValue().getId()));
-            } else {
-                clearForm();
-                UI.getCurrent().navigate(AircraftView.class);
-            }
-        });
-
         binder = new Binder<>(Aircraft.class);
 
         binder.bindInstanceFields(this);

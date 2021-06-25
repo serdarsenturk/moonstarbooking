@@ -96,15 +96,6 @@ public class CheckInView extends Div implements BeforeEnterObserver {
             }
         });
 
-        grid.asSingleSelect().addValueChangeListener(event -> {
-            if (event.getValue() != null) {
-                UI.getCurrent().navigate(String.format(CHECKIN_EDIT_ROUTE_TEMPLATE, event.getValue().getId()));
-            } else {
-                clearForm();
-                UI.getCurrent().navigate(CheckInView.class);
-            }
-        });
-
         binder = new Binder<>(CheckIn.class);
 
         binder.bindInstanceFields(this);
