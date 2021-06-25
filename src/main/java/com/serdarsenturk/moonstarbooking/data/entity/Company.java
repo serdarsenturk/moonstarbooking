@@ -1,6 +1,7 @@
 package com.serdarsenturk.moonstarbooking.data.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Company {
@@ -10,6 +11,9 @@ public class Company {
 
     private String name;
     private String owner;
+
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
+    private List<Aircraft> aircrafts;
 
     protected Company(){}
 
