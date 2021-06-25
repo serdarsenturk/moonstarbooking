@@ -176,7 +176,7 @@ public class CheckInView extends Div implements BeforeEnterObserver {
 
         passengers = new ComboBox<>("Passenger");
         passengers.setItems(passengerRepository.findAll());
-        passengers.setItemLabelGenerator(Passenger::toString);
+        passengers.setItemLabelGenerator(Passenger::getName);
 
         createdAt = new DatePicker("Check in Date");
 
