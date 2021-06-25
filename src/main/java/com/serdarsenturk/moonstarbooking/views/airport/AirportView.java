@@ -18,6 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 @Route(value = "admin/airports", layout = AdminView.class)
 @PageTitle("Airports")
 public class AirportView extends VerticalLayout {
+
     private final IAirportRepository repo;
 
     private final AirportEditor editor;
@@ -36,8 +37,8 @@ public class AirportView extends VerticalLayout {
         this.addNewBtn = new Button("New Airport", VaadinIcon.PLUS.create());
 
         HorizontalLayout actions = new HorizontalLayout(filter, addNewBtn);
-
         add(actions, grid, editor);
+
         grid.setHeight("300px");
         grid.setColumns("name");
 
@@ -56,6 +57,8 @@ public class AirportView extends VerticalLayout {
             editor.setVisible(false);
             listAirports(filter.getValue());
         });
+
+        listAirports(null);
     }
 
     void listAirports(String filterText){
