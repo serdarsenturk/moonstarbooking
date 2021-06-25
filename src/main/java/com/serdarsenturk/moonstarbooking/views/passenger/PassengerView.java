@@ -40,10 +40,9 @@ public class PassengerView extends VerticalLayout {
         add(actions, grid, editor);
 
         grid.setHeight("300px");
-        grid.setColumns("id", "firstName", "lastName", "email");
-        grid.getColumnByKey("id").setWidth("50px").setFlexGrow(0);
+        grid.setColumns("name", "email");
 
-        filter.setPlaceholder("Filter by firstName");
+        filter.setPlaceholder("Filter by name");
 
         filter.setValueChangeMode(ValueChangeMode.EAGER);
         filter.addValueChangeListener(e -> listPassengers(e.getValue()));
@@ -52,7 +51,7 @@ public class PassengerView extends VerticalLayout {
             editor.editPassenger(e.getValue());
         });
 
-        addNewBtn.addClickListener(e -> editor.editPassenger(new Passenger("", "", "")));
+        addNewBtn.addClickListener(e -> editor.editPassenger(new Passenger( "", "")));
 
         editor.setChangeHandler(() -> {
             editor.setVisible(false);
@@ -67,7 +66,7 @@ public class PassengerView extends VerticalLayout {
             grid.setItems(repo.findAll());
         }
         else {
-            grid.setItems(repo.findByFirstNameStartsWithIgnoreCase(filterText));
+            grid.setItems(repo.findByNameStartsWithIgnoreCase(filterText));
         }
     }
 }
