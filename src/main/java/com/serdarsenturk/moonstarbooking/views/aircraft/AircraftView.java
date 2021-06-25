@@ -122,15 +122,15 @@ public class AircraftView extends Div implements BeforeEnterObserver {
                 Notification.show("An exception happened while trying to store the Aircraft details.");
             }
         });
-            // Delete Button listener
-//        delete.addClickListener(e -> {
-//            binder.readBean(this.aircraft);
-//            aircraftService.delete(this.aircraft.getId());
-//            clearForm();
-//            refreshGrid();
-//            Notification.show("Aircraft has deleted.");
-//            UI.getCurrent().navigate(AircraftView.class);
-//        });
+
+        delete.addClickListener(e -> {
+            binder.readBean(this.aircraft);
+            aircraftService.delete(this.aircraft.getId());
+            clearForm();
+            refreshGrid();
+            Notification.show("Aircraft has deleted.");
+            UI.getCurrent().navigate(AircraftView.class);
+        });
 }
 
     @Override
@@ -145,8 +145,6 @@ public class AircraftView extends Div implements BeforeEnterObserver {
                         String.format("The requested Aircraft was not found, ID = %d", aircraftId.get()), 3000,
                         Notification.Position.BOTTOM_START);
 
-                // when a row is selected but the data is no longer available,
-                // refresh grid
                 refreshGrid();
                 event.forwardTo(AircraftView.class);
             }
@@ -164,7 +162,6 @@ public class AircraftView extends Div implements BeforeEnterObserver {
 
         FormLayout formLayout = new FormLayout();
 
-        // Create Combo box
         companies = new ComboBox<>("Company");
         companies.setItems(repository.findAll());
         companies.setItemLabelGenerator(Company::getName);
