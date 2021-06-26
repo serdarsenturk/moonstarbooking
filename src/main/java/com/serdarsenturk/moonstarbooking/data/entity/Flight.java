@@ -33,6 +33,8 @@ public class Flight {
 
     private LocalDate arrivalDate;
 
+    private String aircraftCode;
+
     public Flight(){}
 
     public Flight(String flightCode, LocalDate departureDate, LocalDate arrivalDate, Aircraft aircraft, Airport fromAirport, Airport toAirport){
@@ -44,6 +46,7 @@ public class Flight {
         this.toAirport = toAirport;
         this.fromAirportName = fromAirport.getName();
         this.toAirportName = toAirport.getName();
+        this.aircraftCode = aircraft.getAircraftCode();
     }
 
     public Integer getId() {
@@ -112,6 +115,14 @@ public class Flight {
 
     public void setDepartureDate(LocalDate departureDate) {
         this.departureDate = departureDate;
+    }
+
+    public String getAircraftCode() {
+        return aircraftCode;
+    }
+
+    public void setAircraftCode(String aircraftCode) {
+        this.aircraftCode = aircraftCode;
     }
 
     public List<CheckIn> getCheckIns() {
