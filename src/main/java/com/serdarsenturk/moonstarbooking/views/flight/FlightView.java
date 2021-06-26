@@ -175,7 +175,7 @@ public class FlightView extends Div implements BeforeEnterObserver {
 
         aircrafts = new ComboBox<>("Aircraft");
         aircrafts.setItems(repository2.findAll());
-        aircrafts.setItemLabelGenerator(Aircraft::getCompanyName);
+        aircrafts.setItemLabelGenerator(Aircraft::getAircraftCode);
 
         departure_date = new DatePicker("Departure Date");
         arrival_date = new DatePicker("Arrival Date");
