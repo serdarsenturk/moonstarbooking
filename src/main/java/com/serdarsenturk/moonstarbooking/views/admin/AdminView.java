@@ -10,6 +10,7 @@ import com.serdarsenturk.moonstarbooking.views.passenger.PassengerView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentUtil;
 import com.vaadin.flow.component.applayout.AppLayout;
+import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -28,14 +29,20 @@ public class AdminView extends AppLayout {
     private final Tabs menu;
 
     public AdminView(){
+        H1 title = new H1("Moonstar Booking");
+        title.getStyle()
+                .set("font-size", "var(--lumo-font-size-l)")
+                .set("left", "var(--lumo-space-l)")
+                .set("margin", "0")
+                .set("position", "absolute");
+
         HorizontalLayout header = createHeader();
         menu = createMenuTabs();
-        addToNavbar(createTopBar(header, menu));
+        addToNavbar(title, createTopBar(header, menu));
     }
 
     private VerticalLayout createTopBar(HorizontalLayout header, Tabs menu) {
         VerticalLayout layout = new VerticalLayout();
-        layout.getThemeList().add("dark");
         layout.setWidthFull();
         layout.setSpacing(false);
         layout.setPadding(false);
