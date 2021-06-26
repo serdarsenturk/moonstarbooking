@@ -20,6 +20,7 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.component.textfield.IntegerField;
+import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.ValidationException;
 import com.vaadin.flow.router.BeforeEnterEvent;
@@ -41,6 +42,7 @@ public class AircraftView extends Div implements BeforeEnterObserver {
     private Grid<Aircraft> grid = new Grid<>(Aircraft.class, false);
 
     private IntegerField capacity;
+    private TextField aircraftCode;
     private ComboBox<Company> companies;
     private Button cancel = new Button("Cancel");
     private Button save = new Button("Save");
@@ -100,7 +102,7 @@ public class AircraftView extends Div implements BeforeEnterObserver {
         save.addClickListener(e -> {
             try {
                 if (this.aircraft == null) {
-                    this.aircraft = new Aircraft(companies.getValue(), capacity.getValue());
+                    this.aircraft = new Aircraft(companies.getValue(), capacity.getValue(), aircraftCode.getValue());
                 }
                 binder.writeBean(this.aircraft);
 
@@ -157,9 +159,10 @@ public class AircraftView extends Div implements BeforeEnterObserver {
         companies.setItems(repository.findAll());
         companies.setItemLabelGenerator(Company::getName);
 
+        aircraftCode = new TextField("Aircraft Code");
         capacity = new IntegerField("Capacity");
 
-        Component[] fields = new Component[]{capacity, companies};
+        Component[] fields = new Component[]{aircraftCode, capacity, companies};
 
         for (Component field : fields) {
             ((HasStyle) field).addClassName("full-width");
