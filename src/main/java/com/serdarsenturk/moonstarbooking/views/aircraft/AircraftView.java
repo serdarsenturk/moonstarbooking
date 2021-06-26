@@ -70,6 +70,7 @@ public class AircraftView extends Div implements BeforeEnterObserver {
         add(splitLayout);
 
         // Configure Grid
+        grid.addColumn("aircraftCode").setAutoWidth(true);
         grid.addColumn("capacity").setAutoWidth(true);
         grid.addColumn("companyName").setAutoWidth(true);
 
