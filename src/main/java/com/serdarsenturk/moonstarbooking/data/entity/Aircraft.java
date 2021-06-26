@@ -13,6 +13,8 @@ public class Aircraft{
     @ManyToOne(fetch = FetchType.LAZY)
     private Company company;
 
+    private String aircraftCode;
+
     private Integer capacity;
 
     private String companyName;
@@ -22,8 +24,9 @@ public class Aircraft{
 
     public Aircraft(){}
 
-    public Aircraft(Company company, Integer capacity) {
+    public Aircraft(Company company, Integer capacity, String aircraftCode) {
         this.company = company;
+        this.aircraftCode = aircraftCode;
         this.capacity = capacity;
         this.companyName = company.getName();
     }
@@ -50,6 +53,14 @@ public class Aircraft{
 
     public String getCompanyName() {
         return companyName;
+    }
+
+    public String getAircraftCode() {
+        return aircraftCode;
+    }
+
+    public void setAircraftCode(String aircraftCode) {
+        this.aircraftCode = aircraftCode;
     }
 
     public List<Flight> getFlights() {
