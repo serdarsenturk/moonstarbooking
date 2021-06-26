@@ -44,11 +44,11 @@ public class FlightView extends Div implements BeforeEnterObserver {
 
     Grid<Flight> grid = new Grid<>(Flight.class, false);
 
-    private TextField flight_code;
-    private DatePicker departure_date;
-    private DatePicker arrival_date;
-    private ComboBox<Airport> from_airport;
-    private ComboBox<Airport> to_airport;
+    private TextField flightCode;
+    private DatePicker departureDate;
+    private DatePicker arrivalDate;
+    private ComboBox<Airport> fromAirport;
+    private ComboBox<Airport> toAirport;
     private ComboBox<Aircraft> aircrafts;
 
     private Button cancel = new Button("Cancel");
@@ -113,7 +113,7 @@ public class FlightView extends Div implements BeforeEnterObserver {
         save.addClickListener(e -> {
             try {
                 if (this.flight == null) {
-                    this.flight = new Flight(flight_code.getValue(), departure_date.getValue(), arrival_date.getValue(), aircrafts.getValue(), from_airport.getValue(), to_airport.getValue());
+                    this.flight = new Flight(flightCode.getValue(), departureDate.getValue(), arrivalDate.getValue(), aircrafts.getValue(), fromAirport.getValue(), toAirport.getValue());
                 }
                 binder.writeBean(this.flight);
 
@@ -165,24 +165,24 @@ public class FlightView extends Div implements BeforeEnterObserver {
 
         FormLayout formLayout = new FormLayout();
 
-        to_airport = new ComboBox<>("To");
-        to_airport.setItems(repository.findAll());
-        to_airport.setItemLabelGenerator(Airport::getName);
+        toAirport = new ComboBox<>("To");
+        toAirport.setItems(repository.findAll());
+        toAirport.setItemLabelGenerator(Airport::getName);
 
-        from_airport = new ComboBox<>("From");
-        from_airport.setItems(repository.findAll());
-        from_airport.setItemLabelGenerator(Airport::getName);
+        fromAirport = new ComboBox<>("From");
+        fromAirport.setItems(repository.findAll());
+        fromAirport.setItemLabelGenerator(Airport::getName);
 
         aircrafts = new ComboBox<>("Aircraft");
         aircrafts.setItems(repository2.findAll());
         aircrafts.setItemLabelGenerator(Aircraft::getAircraftCode);
 
-        departure_date = new DatePicker("Departure Date");
-        arrival_date = new DatePicker("Arrival Date");
+        departureDate = new DatePicker("Departure Date");
+        arrivalDate = new DatePicker("Arrival Date");
 
-        flight_code = new TextField("Flight Code");
+        flightCode = new TextField("Flight Code");
 
-        Component[] fields = new Component[]{flight_code, departure_date, arrival_date, from_airport, to_airport,  aircrafts};
+        Component[] fields = new Component[]{flightCode, departureDate, arrivalDate, fromAirport, toAirport,  aircrafts};
 
         for (Component field : fields) {
             ((HasStyle) field).addClassName("full-width");
