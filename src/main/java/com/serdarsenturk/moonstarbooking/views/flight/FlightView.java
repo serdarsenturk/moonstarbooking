@@ -83,6 +83,7 @@ public class FlightView extends Div implements BeforeEnterObserver {
         grid.addColumn("fromAirportName").setAutoWidth(true);
         grid.addColumn("departureDate").setAutoWidth(true);
         grid.addColumn("arrivalDate").setAutoWidth(true);
+        grid.addColumn("aircraftCode").setAutoWidth(true);
 
         grid.addThemeVariants(GridVariant.LUMO_NO_BORDER);
         grid.setHeightFull();
