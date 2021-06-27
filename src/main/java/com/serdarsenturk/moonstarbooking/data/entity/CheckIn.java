@@ -10,8 +10,6 @@ public class CheckIn{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private Integer cost;
-
     @ManyToOne(fetch = FetchType.LAZY)
     private Flight flight;
 
@@ -24,8 +22,7 @@ public class CheckIn{
 
     public CheckIn(){};
 
-    public CheckIn(Integer cost, Flight flight, Passenger passenger, LocalDate createdAt){
-        this.cost = cost;
+    public CheckIn(Flight flight, Passenger passenger, LocalDate createdAt){
         this.flight = flight;
         this.passenger = passenger;
         this.createdAt = createdAt;
@@ -50,14 +47,6 @@ public class CheckIn{
 
     public void setPassenger(Passenger passenger) {
         this.passenger = passenger;
-    }
-
-    public Integer getCost() {
-        return cost;
-    }
-
-    public void setCost(Integer cost) {
-        this.cost = cost;
     }
 
     public LocalDate getCreatedAt() {
