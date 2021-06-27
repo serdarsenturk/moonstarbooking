@@ -35,10 +35,13 @@ public class Flight {
 
     private String aircraftCode;
 
+    private Integer cost;
+
     public Flight(){}
 
-    public Flight(String flightCode, LocalDate departureDate, LocalDate arrivalDate, Aircraft aircraft, Airport fromAirport, Airport toAirport){
+    public Flight(Integer cost, String flightCode, LocalDate departureDate, LocalDate arrivalDate, Aircraft aircraft, Airport fromAirport, Airport toAirport){
         this.flightCode = flightCode;
+        this.cost = cost;
         this.departureDate = departureDate;
         this.arrivalDate = arrivalDate;
         this.aircraft = aircraft;
@@ -123,6 +126,14 @@ public class Flight {
 
     public void setAircraftCode(String aircraftCode) {
         this.aircraftCode = aircraftCode;
+    }
+
+    public Integer getCost() {
+        return cost;
+    }
+
+    public void setCost(Integer cost) {
+        this.cost = cost;
     }
 
     public List<CheckIn> getCheckIns() {
