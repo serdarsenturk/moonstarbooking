@@ -22,6 +22,7 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
+import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.ValidationException;
@@ -45,6 +46,7 @@ public class FlightView extends Div implements BeforeEnterObserver {
     Grid<Flight> grid = new Grid<>(Flight.class, false);
 
     private TextField flightCode;
+    private IntegerField cost;
     private DatePicker departureDate;
     private DatePicker arrivalDate;
     private ComboBox<Airport> fromAirport;
@@ -84,6 +86,7 @@ public class FlightView extends Div implements BeforeEnterObserver {
         grid.addColumn("departureDate").setAutoWidth(true);
         grid.addColumn("arrivalDate").setAutoWidth(true);
         grid.addColumn("aircraftCode").setAutoWidth(true);
+        grid.addColumn("cost").setAutoWidth(true);
 
         grid.addThemeVariants(GridVariant.LUMO_NO_BORDER);
         grid.setHeightFull();
@@ -114,7 +117,7 @@ public class FlightView extends Div implements BeforeEnterObserver {
         save.addClickListener(e -> {
             try {
                 if (this.flight == null) {
-                    this.flight = new Flight(flightCode.getValue(), departureDate.getValue(), arrivalDate.getValue(), aircrafts.getValue(), fromAirport.getValue(), toAirport.getValue());
+                    this.flight = new Flight(cost.getValue(), flightCode.getValue(), departureDate.getValue(), arrivalDate.getValue(), aircrafts.getValue(), fromAirport.getValue(), toAirport.getValue());
                 }
                 binder.writeBean(this.flight);
 
@@ -181,9 +184,10 @@ public class FlightView extends Div implements BeforeEnterObserver {
         departureDate = new DatePicker("Departure Date");
         arrivalDate = new DatePicker("Arrival Date");
 
+        cost = new IntegerField("Cost");
         flightCode = new TextField("Flight Code");
 
-        Component[] fields = new Component[]{flightCode, departureDate, arrivalDate, fromAirport, toAirport,  aircrafts};
+        Component[] fields = new Component[]{flightCode, departureDate, arrivalDate, fromAirport, toAirport,  aircrafts, cost};
 
         for (Component field : fields) {
             ((HasStyle) field).addClassName("full-width");
