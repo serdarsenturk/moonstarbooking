@@ -44,7 +44,6 @@ public class CheckInView extends Div implements BeforeEnterObserver {
 
     private ComboBox<Flight> flights;
     private ComboBox<Passenger> passengers;
-    private IntegerField cost;
     private DatePicker createdAt;
 
     private Button cancel = new Button("Cancel");
@@ -77,7 +76,6 @@ public class CheckInView extends Div implements BeforeEnterObserver {
         grid.addColumn("flightCode").setAutoWidth(true);
         grid.addColumn("passenger").setAutoWidth(true);
         grid.addColumn("createdAt").setAutoWidth(true);
-        grid.addColumn("cost").setAutoWidth(true);
 
         grid.addThemeVariants(GridVariant.LUMO_NO_BORDER);
         grid.setHeightFull();
@@ -108,7 +106,7 @@ public class CheckInView extends Div implements BeforeEnterObserver {
         save.addClickListener(e -> {
             try {
                 if (this.checkIn == null) {
-                    this.checkIn = new CheckIn(cost.getValue(), flights.getValue(), passengers.getValue(), createdAt.getValue());
+                    this.checkIn = new CheckIn(flights.getValue(), passengers.getValue(), createdAt.getValue());
                 }
                 binder.writeBean(this.checkIn);
 
@@ -171,9 +169,7 @@ public class CheckInView extends Div implements BeforeEnterObserver {
 
         createdAt = new DatePicker("Check in Date");
 
-        cost = new IntegerField("Cost");
-
-        Component[] fields = new Component[]{cost, flights, passengers, createdAt};
+        Component[] fields = new Component[]{flights, passengers, createdAt};
 
         for (Component field : fields) {
             ((HasStyle) field).addClassName("full-width");
