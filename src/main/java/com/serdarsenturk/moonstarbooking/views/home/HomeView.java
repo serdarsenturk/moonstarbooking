@@ -3,7 +3,7 @@ package com.serdarsenturk.moonstarbooking.views.home;
 import com.serdarsenturk.moonstarbooking.data.entity.Airport;
 import com.serdarsenturk.moonstarbooking.data.entity.Flight;
 import com.serdarsenturk.moonstarbooking.data.repository.IAirportRepository;
-import com.serdarsenturk.moonstarbooking.data.service.FlightService;
+import com.serdarsenturk.moonstarbooking.data.repository.IFlightRepository;
 import com.serdarsenturk.moonstarbooking.views.main.MainView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
@@ -12,7 +12,6 @@ import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -20,10 +19,8 @@ import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.spring.data.VaadinSpringDataHelpers;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 
+import java.time.LocalDate;
 
 @Route(value = "/", layout = MainView.class)
 @PageTitle("Moonstar Booking")
@@ -40,13 +37,12 @@ public class HomeView extends Div {
 
     private IAirportRepository repository;
 
-    private FlightService flightService;
-
+    private IFlightRepository repositoryFlight;
     Grid<Flight> grid = new Grid<>(Flight.class, false);
 
-    public HomeView(@Autowired FlightService flightService, IAirportRepository repository){
+    public HomeView(IFlightRepository repositoryFlight, IAirportRepository repository){
         this.repository = repository;
-        this.flightService = flightService;
+        this.repositoryFlight = repositoryFlight;
 
         binder = new Binder<>(Flight.class);
 
@@ -63,13 +59,14 @@ public class HomeView extends Div {
         binder.bindInstanceFields(this);
 
         grid.addColumn("flightCode").setAutoWidth(true);
-        grid.addColumn("toAirportName").setAutoWidth(true);
         grid.addColumn("fromAirportName").setAutoWidth(true);
+        grid.addColumn("toAirportName").setAutoWidth(true);
         grid.addColumn("departureDate").setAutoWidth(true);
         grid.addColumn("arrivalDate").setAutoWidth(true);
         grid.addColumn("cost").setAutoWidth(true);
 
-//        clearForm();
+        search.addClickListener(e -> findFlights(fromAirport.getValue(), toAirport.getValue(), date.getValue()));
+
     }
 
     private Component createTitle() {
@@ -108,5 +105,8 @@ public class HomeView extends Div {
         splitLayout.addToPrimary(wrapper);
         wrapper.add(grid);
     }
-    
+
+    private void findFlights(Airport from, Airport to, LocalDate date){
+        grid.setItems(repositoryFlight.findFlightByFromAirportAndToAirportAndDepartureDate(from, to, date));
+    }
 }
