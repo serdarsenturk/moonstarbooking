@@ -81,8 +81,8 @@ public class FlightView extends Div implements BeforeEnterObserver {
         add(splitLayout);
 
         grid.addColumn("flightCode").setAutoWidth(true);
-        grid.addColumn("toAirportName").setAutoWidth(true);
         grid.addColumn("fromAirportName").setAutoWidth(true);
+        grid.addColumn("toAirportName").setAutoWidth(true);
         grid.addColumn("departureDate").setAutoWidth(true);
         grid.addColumn("arrivalDate").setAutoWidth(true);
         grid.addColumn("aircraftCode").setAutoWidth(true);
