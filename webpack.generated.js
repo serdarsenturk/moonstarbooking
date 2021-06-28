@@ -35,9 +35,9 @@ const useClientSideIndexFileForBootstrapping = true;
 const clientSideIndexHTML = path.resolve(__dirname, 'target/index.html');
 const clientSideIndexEntryPoint = path.resolve(__dirname, 'frontend', 'generated/', 'vaadin.ts');;
 const devmodeGizmoJS = path.resolve(__dirname, 'target/flow-frontend/VaadinDevmodeGizmo.js');
-const pwaEnabled = false;
-const offlinePathEnabled = true;
-const offlinePath = 'offline.html';
+const pwaEnabled = true;
+const offlinePathEnabled = false;
+const offlinePath = '';
 const clientServiceWorkerEntryPoint = path.resolve(__dirname, 'target/sw');
 // public path for resources, must match Flow VAADIN_BUILD
 const VAADIN = 'VAADIN';
