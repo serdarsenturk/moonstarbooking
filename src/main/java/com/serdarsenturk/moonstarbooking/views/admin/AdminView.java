@@ -71,7 +71,6 @@ public class AdminView extends AppLayout {
 
     private static Tab[] getAvailableTabs() {
         return new Tab[]{
-                createTab("Home", HomeView.class),
                 createTab("Airports", AirportView.class),
                 createTab("Passengers", PassengerView.class),
                 createTab("Companies", CompanyView.class),
