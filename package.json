@@ -67,7 +67,8 @@
     "@webcomponents/shadycss": "1.9.6",
     "construct-style-sheets-polyfill": "2.4.16",
     "lit-element": "2.5.1",
-    "lit-html": "1.4.1"
+    "lit-html": "1.4.1",
+    "lumo-css-framework": "^4.0.10"
   },
   "devDependencies": {
     "@types/validator": "13.1.0",
@@ -194,6 +195,6 @@
       "workbox-precaching": "6.1.0",
       "workbox-webpack-plugin": "6.1.0"
     },
-    "hash": "78623b024ffc35d8bdd9d5177571c3526252a0d4c10e664b1771a3acdbab7a73"
+    "hash": "abdc907f5f45a94bbe752f8093af09ceb35513f552915169a1dbf36c8150ed8d"
   }
 }
