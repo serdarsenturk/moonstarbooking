@@ -87,39 +87,52 @@ public class HomeView extends Div {
         Dialog dialog = new Dialog();
         dialog.add(new Label("Create Passenger"));
 
-        FormLayout form = new FormLayout();
-
-        TextField name = new TextField();
-        Label a = new Label();
-        Label b = new Label();
-        Label c = new Label();
-        Label d = new Label();
-        EmailField email = new EmailField();
-
-        form.addFormItem(name, "Name");
-        form.addFormItem(email, "Email");
-
-        dialog.setWidth("400px");
-        dialog.setHeight("150px");
+        dialog.setWidth("1000px");
+        dialog.setHeight("1000px");
 
         grid.addComponentColumn(flight -> {
             Button checkIn = new Button("Check In");
             checkIn.addClassName("edit");
+
             checkIn.addClickListener(e -> {
 
                 Span message = new Span();
 
+                FormLayout form = new FormLayout();
+
+                Span flightCode = new Span("Flight Code:");
+                flightCode.add(flight.getFlightCode());
+
+                Span from = new Span("From:");
+                from.add(flight.getFromAirportName());
+
+                Span to = new Span("To:");
+                to.add(flight.getToAirportName());
+
+                Span departureDate = new Span("Arrival Date:");
+                departureDate.add(flight.getDepartureDate().toString());
+
+                Span arrivalDate = new Span("Arrival Date:");
+                arrivalDate.add(flight.getArrivalDate().toString());
+
+                Span cost = new Span("Cost:");
+                cost.add(flight.getCost().toString());
+
+                TextField name = new TextField();
+                EmailField email = new EmailField();
+
+                form.addFormItem(name, "Name");
+                form.addFormItem(email, "Email");
+
                 Button createPassenger = new Button("Create Passenger");
 
-                dialog.add(form);
+                dialog.add(flightCode, from, to, arrivalDate, cost, form, departureDate);
                 dialog.add(createPassenger);
 
                 createPassenger.addClickListener(pass -> {
                     Passenger passenger = new Passenger(name.getValue(), email.getValue());
                     repositoryPassenger.save(passenger);
                     repositoryCheckIn.save(new CheckIn(flight, passenger, flight.getDepartureDate()));
-                    message.setText("Check In completed");
-                    dialog.close();
                 });
 
                 dialog.setCloseOnEsc(true);
