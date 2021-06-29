@@ -6,22 +6,22 @@ import com.serdarsenturk.moonstarbooking.data.repository.IAirportRepository;
 import com.serdarsenturk.moonstarbooking.data.repository.IFlightRepository;
 import com.serdarsenturk.moonstarbooking.views.main.MainView;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
-import com.vaadin.flow.component.dependency.CssImport;
+import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H3;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.data.binder.Binder;
-import com.vaadin.flow.data.renderer.NativeButtonRenderer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.theme.Theme;
 
 import java.time.LocalDate;
 
@@ -35,6 +35,7 @@ public class HomeView extends Div {
     private DatePicker date = new DatePicker("Date");
 
     private Button search = new Button("Search");
+    private Button editBtn = new Button("Edit", VaadinIcon.EDIT.create());
 
     private Binder<Flight> binder;
 
@@ -68,7 +69,17 @@ public class HomeView extends Div {
         grid.addColumn("departureDate").setAutoWidth(true);
         grid.addColumn("arrivalDate").setAutoWidth(true);
         grid.addColumn("cost").setAutoWidth(true);
-        grid.addColumn(new NativeButtonRenderer<>("CheckIn"));
+
+
+
+        grid.addComponentColumn(flight -> {
+            Button checkIn = new Button("Check In");
+            checkIn.addClassName("edit");
+            checkIn.addClickListener(e -> {
+                dialog.open();
+            });
+            return checkIn;
+        });
 
         search.addClickListener(e -> findFlights(fromAirport.getValue(), toAirport.getValue(), date.getValue()));
 
