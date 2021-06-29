@@ -5,11 +5,11 @@ import com.serdarsenturk.moonstarbooking.views.airport.AirportView;
 import com.serdarsenturk.moonstarbooking.views.checkIn.CheckInView;
 import com.serdarsenturk.moonstarbooking.views.company.CompanyView;
 import com.serdarsenturk.moonstarbooking.views.flight.FlightView;
-import com.serdarsenturk.moonstarbooking.views.home.HomeView;
 import com.serdarsenturk.moonstarbooking.views.passenger.PassengerView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentUtil;
 import com.vaadin.flow.component.applayout.AppLayout;
+import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -36,9 +36,11 @@ public class AdminView extends AppLayout {
                 .set("margin", "0")
                 .set("position", "absolute");
 
+        Anchor anchor = new Anchor("/", "Back");
+
         HorizontalLayout header = createHeader();
         menu = createMenuTabs();
-        addToNavbar(title, createTopBar(header, menu));
+        addToNavbar(title, anchor, createTopBar(header, menu));
     }
 
     private VerticalLayout createTopBar(HorizontalLayout header, Tabs menu) {
