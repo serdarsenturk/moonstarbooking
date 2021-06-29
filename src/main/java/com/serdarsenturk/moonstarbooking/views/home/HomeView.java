@@ -1,12 +1,15 @@
 package com.serdarsenturk.moonstarbooking.views.home;
 
 import com.serdarsenturk.moonstarbooking.data.entity.Airport;
+import com.serdarsenturk.moonstarbooking.data.entity.CheckIn;
 import com.serdarsenturk.moonstarbooking.data.entity.Flight;
+import com.serdarsenturk.moonstarbooking.data.entity.Passenger;
 import com.serdarsenturk.moonstarbooking.data.repository.IAirportRepository;
+import com.serdarsenturk.moonstarbooking.data.repository.ICheckInRepository;
 import com.serdarsenturk.moonstarbooking.data.repository.IFlightRepository;
+import com.serdarsenturk.moonstarbooking.data.repository.IPassengerRepository;
 import com.serdarsenturk.moonstarbooking.views.main.MainView;
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
@@ -16,16 +19,20 @@ import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H3;
+import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
+import com.vaadin.flow.component.textfield.EmailField;
+import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 import java.time.LocalDate;
 
-@Route(value = "/", layout = MainView.class)
+@Route(value = "", layout = MainView.class)
 @PageTitle("Moonstar Booking")
 public class HomeView extends Div {
 
@@ -43,11 +50,17 @@ public class HomeView extends Div {
 
     private IFlightRepository repositoryFlight;
 
+    private IPassengerRepository repositoryPassenger;
+
+    private ICheckInRepository repositoryCheckIn;
+
     Grid<Flight> grid = new Grid<>(Flight.class, false);
 
-    public HomeView(IFlightRepository repositoryFlight, IAirportRepository repository){
+    public HomeView(IFlightRepository repositoryFlight, IAirportRepository repository, IPassengerRepository repositoryPassenger, ICheckInRepository repositoryCheckIn){
         this.repository = repository;
         this.repositoryFlight = repositoryFlight;
+        this.repositoryPassenger = repositoryPassenger;
+        this.repositoryCheckIn = repositoryCheckIn;
 
         binder = new Binder<>(Flight.class);
 
@@ -71,12 +84,49 @@ public class HomeView extends Div {
         grid.addColumn("cost").setAutoWidth(true);
 
 
+        Dialog dialog = new Dialog();
+        dialog.add(new Label("Create Passenger"));
+
+        FormLayout form = new FormLayout();
+
+        TextField name = new TextField();
+        Label a = new Label();
+        Label b = new Label();
+        Label c = new Label();
+        Label d = new Label();
+        EmailField email = new EmailField();
+
+        form.addFormItem(name, "Name");
+        form.addFormItem(email, "Email");
+
+        dialog.setWidth("400px");
+        dialog.setHeight("150px");
 
         grid.addComponentColumn(flight -> {
             Button checkIn = new Button("Check In");
             checkIn.addClassName("edit");
             checkIn.addClickListener(e -> {
+
+                Span message = new Span();
+
+                Button createPassenger = new Button("Create Passenger");
+
+                dialog.add(form);
+                dialog.add(createPassenger);
+
+                createPassenger.addClickListener(pass -> {
+                    Passenger passenger = new Passenger(name.getValue(), email.getValue());
+                    repositoryPassenger.save(passenger);
+                    repositoryCheckIn.save(new CheckIn(flight, passenger, flight.getDepartureDate()));
+                    message.setText("Check In completed");
+                    dialog.close();
+                });
+
+                dialog.setCloseOnEsc(true);
+                dialog.setCloseOnOutsideClick(true);
+
                 dialog.open();
+
             });
             return checkIn;
         });
