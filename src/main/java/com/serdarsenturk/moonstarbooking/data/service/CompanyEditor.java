@@ -47,7 +47,6 @@ public class CompanyEditor extends VerticalLayout implements KeyNotifier {
 
         addKeyPressListener(Key.ENTER, e -> save());
 
-        // wire action buttons to save, delete and reset
         save.addClickListener(e -> save());
         delete.addClickListener(e -> delete());
         cancel.addClickListener(e -> editCompany(company));
