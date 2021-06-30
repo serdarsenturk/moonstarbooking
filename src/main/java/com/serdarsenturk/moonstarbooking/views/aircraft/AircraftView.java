@@ -8,6 +8,7 @@ import com.serdarsenturk.moonstarbooking.views.admin.AdminView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
@@ -148,7 +149,8 @@ public class AircraftView extends Div implements BeforeEnterObserver {
     private void createEditorLayout(SplitLayout splitLayout) {
         Div editorLayoutDiv = new Div();
         editorLayoutDiv.setClassName("flex flex-col");
-        editorLayoutDiv.setWidth("400px");
+        editorLayoutDiv.setWidth(400, Unit.PIXELS);
+        editorLayoutDiv.setHeight(520, Unit.PIXELS);
 
         Div editorDiv = new Div();
         editorDiv.setClassName("p-l flex-grow");

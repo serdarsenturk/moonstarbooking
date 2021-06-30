@@ -8,6 +8,7 @@ import com.serdarsenturk.moonstarbooking.views.admin.AdminView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
@@ -64,6 +65,7 @@ public class CheckInView extends Div implements BeforeEnterObserver {
         this.flightRepository = flightRepository;
         this.passengerRepository = passengerRepository;
 
+        // Create UI
         SplitLayout splitLayout = new SplitLayout();
         splitLayout.setSizeFull();
 
@@ -72,6 +74,7 @@ public class CheckInView extends Div implements BeforeEnterObserver {
 
         add(splitLayout);
 
+        // Configure Grid
         grid.addColumn("flightCode").setAutoWidth(true);
         grid.addColumn("passenger").setAutoWidth(true);
         grid.addColumn("createdAt").setAutoWidth(true);
@@ -84,6 +87,7 @@ public class CheckInView extends Div implements BeforeEnterObserver {
                 .stream()
         );
 
+        // when a row is selected or deselected, populate form
         grid.asSingleSelect().addValueChangeListener(event -> {
             if (event.getValue() != null) {
                 UI.getCurrent().navigate(String.format(CHECKIN_EDIT_ROUTE_TEMPLATE, event.getValue().getId()));
@@ -149,15 +153,14 @@ public class CheckInView extends Div implements BeforeEnterObserver {
     private void createEditorLayout(SplitLayout splitLayout) {
         Div editorLayoutDiv = new Div();
         editorLayoutDiv.setClassName("flex flex-col");
-        editorLayoutDiv.setWidth("400px");
+        editorLayoutDiv.setWidth(400, Unit.PIXELS);
+        editorLayoutDiv.setHeight(520, Unit.PIXELS);
 
         Div editorDiv = new Div();
-        editorDiv.setClassName("p-l flex-grow");
         editorLayoutDiv.add(editorDiv);
 
         FormLayout formLayout = new FormLayout();
 
-        // Create Combo box
         flights = new ComboBox<>("Flight");
         flights.setItems(flightRepository.findAll());
         flights.setItemLabelGenerator(Flight::getFlightCode);
@@ -183,7 +186,6 @@ public class CheckInView extends Div implements BeforeEnterObserver {
 
     private void createButtonLayout(Div editorLayoutDiv) {
         HorizontalLayout buttonLayout = new HorizontalLayout();
-        buttonLayout.setClassName("w-full flex-wrap bg-contrast-5 py-s px-l");
         buttonLayout.setSpacing(true);
         cancel.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
         save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
