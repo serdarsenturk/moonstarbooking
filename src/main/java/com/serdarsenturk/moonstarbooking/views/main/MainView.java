@@ -5,8 +5,9 @@ import com.serdarsenturk.moonstarbooking.views.home.HomeView;
 import java.util.Optional;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentUtil;
+import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.applayout.AppLayout;
-import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.H5;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -44,10 +45,13 @@ public class MainView extends AppLayout {
             header.setSpacing(false);
             header.setWidthFull();
             header.setAlignItems(FlexComponent.Alignment.CENTER);
-            Image logo = new Image("images/logo.png", "Moonstar");
-            logo.setId("logo");
+
+            Image logo = new Image("images/logo1.png", "Moonstar");
+            logo.setHeight(75, Unit.PIXELS);
+            logo.setWidth(75, Unit.PIXELS);
             header.add(logo);
-            header.add(new H1("Moonstar Booking"));
+
+            header.add(new H5("Moonstar Booking"));
 
             return header;
         }
