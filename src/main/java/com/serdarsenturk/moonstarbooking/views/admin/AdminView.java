@@ -6,6 +6,7 @@ import com.serdarsenturk.moonstarbooking.views.checkIn.CheckInView;
 import com.serdarsenturk.moonstarbooking.views.company.CompanyView;
 import com.serdarsenturk.moonstarbooking.views.flight.FlightView;
 import com.serdarsenturk.moonstarbooking.views.home.HomeView;
+import com.serdarsenturk.moonstarbooking.views.main.MainView;
 import com.serdarsenturk.moonstarbooking.views.passenger.PassengerView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentUtil;
@@ -19,14 +20,10 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.TabVariant;
 import com.vaadin.flow.component.tabs.Tabs;
-import com.vaadin.flow.router.PageTitle;
-import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLink;
 
 import java.util.Optional;
 
-@Route(value = "admin")
-@PageTitle("Admin")
 public class AdminView extends AppLayout {
     private final Tabs menu;
 
