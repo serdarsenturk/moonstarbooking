@@ -12,6 +12,7 @@ import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
@@ -35,6 +36,7 @@ import java.util.Optional;
 
 @Route(value = "aircrafts/:aircraftID?/:action?(edit)", layout = AdminView.class)
 @PageTitle("Aircraft")
+@CssImport("./styles/shared-styles.css")
 public class AircraftView extends Div implements BeforeEnterObserver {
 
     private final String AIRCRAFT_ID = "aircraftID";
