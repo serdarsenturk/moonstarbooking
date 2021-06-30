@@ -25,6 +25,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.ValidationException;
 import com.vaadin.flow.router.BeforeEnterEvent;
@@ -50,6 +51,8 @@ public class FlightView extends Div implements BeforeEnterObserver {
     private IntegerField cost;
     private DatePicker departureDate;
     private DatePicker arrivalDate;
+    private TimePicker departureTime;
+    private TimePicker arrivalTime;
     private ComboBox<Airport> fromAirport;
     private ComboBox<Airport> toAirport;
     private ComboBox<Aircraft> aircrafts;
@@ -64,14 +67,14 @@ public class FlightView extends Div implements BeforeEnterObserver {
 
     private FlightService flightService;
 
-    private IAirportRepository repository;
+    private IAirportRepository repositoryAirport;
 
-    private IAircraftRepository repository2;
+    private IAircraftRepository repositoryAircraft;
 
-    public FlightView(@Autowired FlightService flightService, IAirportRepository repository, IAircraftRepository repository2){
+    public FlightView(@Autowired FlightService flightService, IAirportRepository repositoryAirport, IAircraftRepository repositoryAircraft){
         this.flightService = flightService;
-        this.repository = repository;
-        this.repository2 = repository2;
+        this.repositoryAirport = repositoryAirport;
+        this.repositoryAircraft = repositoryAircraft;
 
         // Create UI
         SplitLayout splitLayout = new SplitLayout();
@@ -87,7 +90,9 @@ public class FlightView extends Div implements BeforeEnterObserver {
         grid.addColumn("fromAirportName").setAutoWidth(true);
         grid.addColumn("toAirportName").setAutoWidth(true);
         grid.addColumn("departureDate").setAutoWidth(true);
+        grid.addColumn("departureTime").setAutoWidth(true);
         grid.addColumn("arrivalDate").setAutoWidth(true);
+        grid.addColumn("arrivalTime").setAutoWidth(true);
         grid.addColumn("aircraftCode").setAutoWidth(true);
         grid.addColumn("cost").setAutoWidth(true);
 
@@ -121,7 +126,7 @@ public class FlightView extends Div implements BeforeEnterObserver {
         save.addClickListener(e -> {
             try {
                 if (this.flight == null) {
-                    this.flight = new Flight(cost.getValue(), flightCode.getValue(), departureDate.getValue(), arrivalDate.getValue(), aircrafts.getValue(), fromAirport.getValue(), toAirport.getValue());
+                    this.flight = new Flight(cost.getValue(), flightCode.getValue(), departureDate.getValue(), arrivalDate.getValue(), aircrafts.getValue(), fromAirport.getValue(), toAirport.getValue(), departureTime.getValue(), arrivalTime.getValue());
                 }
                 binder.writeBean(this.flight);
 
@@ -175,24 +180,27 @@ public class FlightView extends Div implements BeforeEnterObserver {
         FormLayout formLayout = new FormLayout();
 
         toAirport = new ComboBox<>("To");
-        toAirport.setItems(repository.findAll());
+        toAirport.setItems(repositoryAirport.findAll());
         toAirport.setItemLabelGenerator(Airport::getName);
 
         fromAirport = new ComboBox<>("From");
-        fromAirport.setItems(repository.findAll());
+        fromAirport.setItems(repositoryAirport.findAll());
         fromAirport.setItemLabelGenerator(Airport::getName);
 
         aircrafts = new ComboBox<>("Aircraft");
-        aircrafts.setItems(repository2.findAll());
+        aircrafts.setItems(repositoryAircraft.findAll());
         aircrafts.setItemLabelGenerator(Aircraft::getAircraftCode);
 
         departureDate = new DatePicker("Departure Date");
         arrivalDate = new DatePicker("Arrival Date");
 
+        departureTime = new TimePicker("Departure Time");
+        arrivalTime = new TimePicker("Arrival Time");
+
         cost = new IntegerField("Cost");
         flightCode = new TextField("Flight Code");
 
-        Component[] fields = new Component[]{flightCode, departureDate, arrivalDate, fromAirport, toAirport,  aircrafts, cost};
+        Component[] fields = new Component[]{flightCode, departureDate, departureTime, arrivalDate, arrivalTime, fromAirport, toAirport,  aircrafts, cost};
 
         for (Component field : fields) {
             ((HasStyle) field).addClassName("full-width");
