@@ -13,6 +13,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
@@ -33,8 +34,10 @@ import org.springframework.data.domain.PageRequest;
 
 import java.util.Optional;
 
-@Route(value = "checkins/:checkInID?/:action?(edit)", layout = AdminView.class)
+@Route(value = "admin/checkins/:checkInID?/:action?(edit)", layout = AdminView.class)
 @PageTitle("Checkins")
+@CssImport("./styles/shared-styles.css")
+
 public class CheckInView extends Div implements BeforeEnterObserver {
 
     private final String CHECKIN_ID = "checkInID";
