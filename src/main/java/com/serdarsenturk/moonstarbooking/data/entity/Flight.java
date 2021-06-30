@@ -2,6 +2,7 @@ package com.serdarsenturk.moonstarbooking.data.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Entity
@@ -31,7 +32,11 @@ public class Flight {
 
     private LocalDate departureDate;
 
+    private LocalTime departureTime;
+
     private LocalDate arrivalDate;
+
+    private LocalTime arrivalTime;
 
     private String aircraftCode;
 
@@ -39,11 +44,13 @@ public class Flight {
 
     public Flight(){}
 
-    public Flight(Integer cost, String flightCode, LocalDate departureDate, LocalDate arrivalDate, Aircraft aircraft, Airport fromAirport, Airport toAirport){
+    public Flight(Integer cost, String flightCode, LocalDate departureDate, LocalDate arrivalDate, Aircraft aircraft, Airport fromAirport, Airport toAirport, LocalTime departureTime, LocalTime arrivalTime){
         this.flightCode = flightCode;
         this.cost = cost;
         this.departureDate = departureDate;
+        this.departureTime = departureTime;
         this.arrivalDate = arrivalDate;
+        this.arrivalTime = arrivalTime;
         this.aircraft = aircraft;
         this.fromAirport = fromAirport;
         this.toAirport = toAirport;
@@ -134,6 +141,22 @@ public class Flight {
 
     public void setCost(Integer cost) {
         this.cost = cost;
+    }
+
+    public LocalTime getDepartureTime() {
+        return departureTime;
+    }
+
+    public void setDepartureTime(LocalTime departureTime) {
+        this.departureTime = departureTime;
+    }
+
+    public LocalTime getArrivalTime() {
+        return arrivalTime;
+    }
+
+    public void setArrivalTime(LocalTime arrivalTime) {
+        this.arrivalTime = arrivalTime;
     }
 
     public List<CheckIn> getCheckIns() {
