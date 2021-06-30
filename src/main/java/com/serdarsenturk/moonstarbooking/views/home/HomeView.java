@@ -10,10 +10,12 @@ import com.serdarsenturk.moonstarbooking.data.repository.IFlightRepository;
 import com.serdarsenturk.moonstarbooking.data.repository.IPassengerRepository;
 import com.serdarsenturk.moonstarbooking.views.main.MainView;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
+import com.vaadin.flow.component.details.Details;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
@@ -23,6 +25,7 @@ import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.TextField;
@@ -41,7 +44,7 @@ public class HomeView extends Div {
 
     private DatePicker date = new DatePicker("Date");
 
-    private Button search = new Button("Search");
+    private Button search = new Button("Search", VaadinIcon.SEARCH.create());
     private Button editBtn = new Button("Edit", VaadinIcon.EDIT.create());
 
     private Binder<Flight> binder;
@@ -83,12 +86,11 @@ public class HomeView extends Div {
         grid.addColumn("arrivalDate").setAutoWidth(true);
         grid.addColumn("cost").setAutoWidth(true);
 
-
         Dialog dialog = new Dialog();
         dialog.add(new Label("Create Passenger"));
-
-        dialog.setWidth("1000px");
-        dialog.setHeight("1000px");
+        dialog.setResizable(true);
+        dialog.setWidth("500px");
+        dialog.setHeight("500px");
 
         grid.addComponentColumn(flight -> {
             Button checkIn = new Button("Check In");
@@ -96,27 +98,31 @@ public class HomeView extends Div {
 
             checkIn.addClickListener(e -> {
 
-                Span message = new Span();
-
                 FormLayout form = new FormLayout();
 
-                Span flightCode = new Span("Flight Code:");
+                Span flightCode = new Span("Flight Code: ");
                 flightCode.add(flight.getFlightCode());
 
-                Span from = new Span("From:");
+                Span from = new Span("From: ");
                 from.add(flight.getFromAirportName());
 
-                Span to = new Span("To:");
+                Span to = new Span("To: ");
                 to.add(flight.getToAirportName());
 
-                Span departureDate = new Span("Arrival Date:");
+                Span departureDate = new Span("Departure Date: ");
                 departureDate.add(flight.getDepartureDate().toString());
 
-                Span arrivalDate = new Span("Arrival Date:");
+                Span arrivalDate = new Span("Arrival Date: ");
                 arrivalDate.add(flight.getArrivalDate().toString());
 
-                Span cost = new Span("Cost:");
-                cost.add(flight.getCost().toString());
+                Span cost = new Span("Cost: ");
+                cost.add(flight.getCost().toString() + "$");
+
+                VerticalLayout content = new VerticalLayout(flightCode, from, to, departureDate, arrivalDate, cost);
+                content.setSpacing(true);
+                content.setPadding(true);
+
+                Details details = new Details("Booking Details", content);
 
                 TextField name = new TextField();
                 EmailField email = new EmailField();
@@ -124,9 +130,9 @@ public class HomeView extends Div {
                 form.addFormItem(name, "Name");
                 form.addFormItem(email, "Email");
 
-                Button createPassenger = new Button("Create Passenger");
+                Button createPassenger = new Button("Create Passenger and Check In", VaadinIcon.PLUS.create());
 
-                dialog.add(flightCode, from, to, arrivalDate, cost, form, departureDate);
+                dialog.add(details, form);
                 dialog.add(createPassenger);
 
                 createPassenger.addClickListener(pass -> {
@@ -155,7 +161,7 @@ public class HomeView extends Div {
     private Component createFormLayout() {
         FormLayout formLayout = new FormLayout();
 
-        fromAirport.setWidth("50%");
+        fromAirport.setWidth(50, Unit.PIXELS);
         fromAirport.setItems(repository.findAll());
         fromAirport.setItemLabelGenerator(Airport::getName);
 
