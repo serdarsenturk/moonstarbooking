@@ -15,6 +15,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
@@ -38,8 +39,9 @@ import org.springframework.data.domain.PageRequest;
 
 import java.util.Optional;
 
-@Route(value = "flights/:flightID?/:action?(edit)", layout = AdminView.class)
+@Route(value = "admin/flights/:flightID?/:action?(edit)", layout = AdminView.class)
 @PageTitle("Flights")
+@CssImport("./styles/shared-styles.css")
 public class FlightView extends Div implements BeforeEnterObserver {
 
     private final String FLIGHT_ID = "flightID";
