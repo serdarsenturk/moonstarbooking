@@ -8,15 +8,14 @@ import com.serdarsenturk.moonstarbooking.data.repository.IAirportRepository;
 import com.serdarsenturk.moonstarbooking.data.repository.ICheckInRepository;
 import com.serdarsenturk.moonstarbooking.data.repository.IFlightRepository;
 import com.serdarsenturk.moonstarbooking.data.repository.IPassengerRepository;
-import com.serdarsenturk.moonstarbooking.views.checkIn.CheckInView;
 import com.serdarsenturk.moonstarbooking.views.main.MainView;
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.details.Details;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -40,6 +39,8 @@ import java.time.LocalDate;
 
 @Route(value = "", layout = MainView.class)
 @PageTitle("Moonstar Booking")
+@CssImport("./styles/shared-styles.css")
+
 public class HomeView extends Div {
 
     private ComboBox<Airport> fromAirport = new ComboBox<>("FROM");
