@@ -5,6 +5,7 @@ import com.serdarsenturk.moonstarbooking.data.repository.IPassengerRepository;
 import com.serdarsenturk.moonstarbooking.data.service.PassengerEditor;
 import com.serdarsenturk.moonstarbooking.views.admin.AdminView;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -17,6 +18,8 @@ import org.apache.commons.lang3.StringUtils;
 
 @Route(value = "admin/passengers", layout = AdminView.class)
 @PageTitle("Passengers")
+@CssImport("./styles/shared-styles.css")
+
 public class PassengerView extends VerticalLayout {
 
     private final IPassengerRepository repo;
