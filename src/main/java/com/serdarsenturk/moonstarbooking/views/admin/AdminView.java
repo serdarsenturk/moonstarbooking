@@ -53,10 +53,11 @@ public class AdminView extends AppLayout {
         header.setPadding(false);
         header.setSpacing(false);
         header.setWidthFull();
-        header.setAlignItems(FlexComponent.Alignment.CENTER);
+        header.setHeight(20, Unit.PIXELS);
+        header.setAlignItems(FlexComponent.Alignment.START);
 
         Image logo = new Image("images/logo1.png", "Moonstar");
-        logo.setHeight(90, Unit.PIXELS);
+        logo.setHeight(70, Unit.PIXELS);
         logo.setWidth(90, Unit.PIXELS);
         header.add(logo);
 
