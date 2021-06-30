@@ -56,8 +56,8 @@ public class AdminView extends AppLayout {
         header.setAlignItems(FlexComponent.Alignment.CENTER);
 
         Image logo = new Image("images/logo1.png", "Moonstar");
-        logo.setHeight(75, Unit.PIXELS);
-        logo.setWidth(75, Unit.PIXELS);
+        logo.setHeight(90, Unit.PIXELS);
+        logo.setWidth(90, Unit.PIXELS);
         header.add(logo);
 
         header.add(new H5("Moonstar Booking"));
