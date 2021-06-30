@@ -97,63 +97,59 @@ public class HomeView extends Div {
 
         dialog.setCloseOnEsc(true);
         dialog.setCloseOnOutsideClick(true);
-        dialog.setModal(false);
 
         grid.addComponentColumn(flight -> {
             Button checkIn = new Button("Check In");
             checkIn.addClassName("edit");
 
+            FormLayout form = new FormLayout();
+
+            Span flightCode = new Span("Flight Code: ");
+            flightCode.add(flight.getFlightCode());
+
+            Span from = new Span("From: ");
+            from.add(flight.getFromAirportName());
+
+            Span to = new Span("To: ");
+            to.add(flight.getToAirportName());
+
+            Span departureDate = new Span("Departure Date: ");
+            departureDate.add(flight.getDepartureDate().toString());
+
+            Span arrivalDate = new Span("Arrival Date: ");
+            arrivalDate.add(flight.getArrivalDate().toString());
+
+            Span cost = new Span("Cost: ");
+            cost.add(flight.getCost().toString() + "$");
+
+            VerticalLayout content = new VerticalLayout(flightCode, from, to, departureDate, arrivalDate, cost);
+            content.setSpacing(true);
+            content.setPadding(true);
+
+            Details details = new Details("Booking Details", content);
+
+            TextField name = new TextField();
+            EmailField email = new EmailField();
+
+            form.addFormItem(name, "Name");
+            form.addFormItem(email, "Email");
+
+            Button createPassenger = new Button("Create Passenger and Check In", VaadinIcon.PLUS.create());
+
+            dialog.add(details, form);
+            dialog.add(createPassenger);
+
             checkIn.addClickListener(e -> {
 
                 dialog.open();
-
-                FormLayout form = new FormLayout();
-
-                Span flightCode = new Span("Flight Code: ");
-                flightCode.add(flight.getFlightCode());
-
-                Span from = new Span("From: ");
-                from.add(flight.getFromAirportName());
-
-                Span to = new Span("To: ");
-                to.add(flight.getToAirportName());
-
-                Span departureDate = new Span("Departure Date: ");
-                departureDate.add(flight.getDepartureDate().toString());
-
-                Span arrivalDate = new Span("Arrival Date: ");
-                arrivalDate.add(flight.getArrivalDate().toString());
-
-                Span cost = new Span("Cost: ");
-                cost.add(flight.getCost().toString() + "$");
-
-                VerticalLayout content = new VerticalLayout(flightCode, from, to, departureDate, arrivalDate, cost);
-                content.setSpacing(true);
-                content.setPadding(true);
-
-                Details details = new Details("Booking Details", content);
-
-                TextField name = new TextField();
-                EmailField email = new EmailField();
-
-                form.addFormItem(name, "Name");
-                form.addFormItem(email, "Email");
-
-                Button createPassenger = new Button("Create Passenger and Check In", VaadinIcon.PLUS.create());
-
-                dialog.add(details, form);
-                dialog.add(createPassenger);
 
                 createPassenger.addClickListener(check -> {
                     Passenger passenger = new Passenger(name.getValue(), email.getValue());
                     repositoryPassenger.save(passenger);
                     repositoryCheckIn.save(new CheckIn(flight, passenger, flight.getDepartureDate()));
 
-                    dialog.addDialogCloseActionListener(close-> {
-                        Notification.show("Check In succesful");
-                        UI.getCurrent().navigate(HomeView.class);
-                        dialog.close();
-                    });
+                    Notification.show("Check In succesful");
+                    dialog.close();
                 });
             });
             return checkIn;
