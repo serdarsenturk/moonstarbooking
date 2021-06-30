@@ -8,8 +8,10 @@ import com.serdarsenturk.moonstarbooking.data.repository.IAirportRepository;
 import com.serdarsenturk.moonstarbooking.data.repository.ICheckInRepository;
 import com.serdarsenturk.moonstarbooking.data.repository.IFlightRepository;
 import com.serdarsenturk.moonstarbooking.data.repository.IPassengerRepository;
+import com.serdarsenturk.moonstarbooking.views.checkIn.CheckInView;
 import com.serdarsenturk.moonstarbooking.views.main.MainView;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -24,6 +26,7 @@ import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
@@ -87,16 +90,22 @@ public class HomeView extends Div {
         grid.addColumn("cost").setAutoWidth(true);
 
         Dialog dialog = new Dialog();
-        dialog.add(new Label("Create Passenger"));
+        dialog.add(new Label("Summary of booking"));
         dialog.setResizable(true);
         dialog.setWidth("500px");
         dialog.setHeight("500px");
+
+        dialog.setCloseOnEsc(true);
+        dialog.setCloseOnOutsideClick(true);
+        dialog.setModal(false);
 
         grid.addComponentColumn(flight -> {
             Button checkIn = new Button("Check In");
             checkIn.addClassName("edit");
 
             checkIn.addClickListener(e -> {
+
+                dialog.open();
 
                 FormLayout form = new FormLayout();
 
@@ -135,17 +144,17 @@ public class HomeView extends Div {
                 dialog.add(details, form);
                 dialog.add(createPassenger);
 
-                createPassenger.addClickListener(pass -> {
+                createPassenger.addClickListener(check -> {
                     Passenger passenger = new Passenger(name.getValue(), email.getValue());
                     repositoryPassenger.save(passenger);
                     repositoryCheckIn.save(new CheckIn(flight, passenger, flight.getDepartureDate()));
+
+                    dialog.addDialogCloseActionListener(close-> {
+                        Notification.show("Check In succesful");
+                        UI.getCurrent().navigate(HomeView.class);
+                        dialog.close();
+                    });
                 });
-
-                dialog.setCloseOnEsc(true);
-                dialog.setCloseOnOutsideClick(true);
-
-                dialog.open();
-
             });
             return checkIn;
         });
