@@ -5,6 +5,7 @@ import com.serdarsenturk.moonstarbooking.data.repository.IAirportRepository;
 import com.serdarsenturk.moonstarbooking.data.service.AirportEditor;
 import com.serdarsenturk.moonstarbooking.views.admin.AdminView;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -17,6 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 
 @Route(value = "admin/airports", layout = AdminView.class)
 @PageTitle("Airports")
+@CssImport("./styles/shared-styles.css")
 public class AirportView extends VerticalLayout {
 
     private final IAirportRepository repo;
