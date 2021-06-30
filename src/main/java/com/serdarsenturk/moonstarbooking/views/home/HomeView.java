@@ -86,7 +86,9 @@ public class HomeView extends Div {
         grid.addColumn("fromAirportName").setAutoWidth(true);
         grid.addColumn("toAirportName").setAutoWidth(true);
         grid.addColumn("departureDate").setAutoWidth(true);
+        grid.addColumn("departureTime").setAutoWidth(true);
         grid.addColumn("arrivalDate").setAutoWidth(true);
+        grid.addColumn("arrivalTime").setAutoWidth(true);
         grid.addColumn("cost").setAutoWidth(true);
 
         Dialog dialog = new Dialog();
@@ -113,11 +115,11 @@ public class HomeView extends Div {
             Span to = new Span("To: ");
             to.add(flight.getToAirportName());
 
-            Span departureDate = new Span("Departure Date: ");
-            departureDate.add(flight.getDepartureDate().toString());
+            Span departureDate = new Span("Departure: ");
+            departureDate.add(flight.getDepartureDate().toString() + " - " +flight.getDepartureTime().toString() );
 
-            Span arrivalDate = new Span("Arrival Date: ");
-            arrivalDate.add(flight.getArrivalDate().toString());
+            Span arrivalDate = new Span("Arrival: ");
+            arrivalDate.add(flight.getArrivalDate().toString() + " - " + flight.getArrivalTime().toString());
 
             Span cost = new Span("Cost: ");
             cost.add(flight.getCost().toString() + "$");
