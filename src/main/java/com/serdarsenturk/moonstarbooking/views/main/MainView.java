@@ -1,14 +1,15 @@
 package com.serdarsenturk.moonstarbooking.views.main;
 
-import com.serdarsenturk.moonstarbooking.views.admin.AdminView;
+import com.serdarsenturk.moonstarbooking.views.about.AboutView;
 import com.serdarsenturk.moonstarbooking.views.admin_login.AdminLoginView;
-import com.serdarsenturk.moonstarbooking.views.airport.AirportView;
 import com.serdarsenturk.moonstarbooking.views.home.HomeView;
 import java.util.Optional;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentUtil;
 import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.applayout.AppLayout;
+import com.vaadin.flow.component.dependency.CssImport;
+import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.H5;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
@@ -19,15 +20,16 @@ import com.vaadin.flow.component.tabs.TabVariant;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.router.RouterLink;
 
+@CssImport("./styles/shared-styles.css")
 public class MainView extends AppLayout {
 
         private final Tabs menu;
 
     public MainView() {
-            HorizontalLayout header = createHeader();
-            menu = createMenuTabs();
-            addToNavbar(createTopBar(header, menu));
-        }
+        HorizontalLayout header = createHeader();
+        menu = createMenuTabs();
+        addToNavbar(createTopBar(header, menu));
+    }
 
         private VerticalLayout createTopBar(HorizontalLayout header, Tabs menu) {
             VerticalLayout layout = new VerticalLayout();
@@ -42,7 +44,7 @@ public class MainView extends AppLayout {
 
         private HorizontalLayout createHeader() {
             HorizontalLayout header = new HorizontalLayout();
-            header.setClassName("topmenu-header");
+            header.setClassName("menu-header");
             header.setPadding(false);
             header.setSpacing(false);
             header.setWidthFull();
@@ -54,7 +56,13 @@ public class MainView extends AppLayout {
             logo.setWidth(90, Unit.PIXELS);
             header.add(logo);
 
-            header.add(new H5("Moonstar Booking"));
+            H5 title = new H5("Moonstar Booking");
+            title.setClassName("menu-header");
+            header.add(title);
+
+            Anchor login = new Anchor("login", "Login");
+            login.setClassName("menu-link");
+            header.add(login);
 
             return header;
         }
@@ -69,7 +77,9 @@ public class MainView extends AppLayout {
         private static Tab[] getAvailableTabs() {
             return new Tab[]{
                     createTab("Home", HomeView.class),
-                    createTab("Admin", AdminLoginView.class)};
+                    createTab("Admin", AdminLoginView.class),
+                    createTab("About", AboutView.class)
+            };
         }
 
         private static Tab createTab(String text, Class<? extends Component> navigationTarget) {
