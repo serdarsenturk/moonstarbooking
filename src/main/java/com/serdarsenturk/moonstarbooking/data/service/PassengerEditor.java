@@ -41,7 +41,7 @@ public class PassengerEditor extends VerticalLayout implements KeyNotifier {
         add(name, email, actions);
 
         binder.bindInstanceFields(this);
-
+        
         setSpacing(true);
 
         save.getElement().getThemeList().add("primary");
