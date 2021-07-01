@@ -155,7 +155,6 @@ public class CheckInView extends Div implements BeforeEnterObserver {
 
     private void createEditorLayout(SplitLayout splitLayout) {
         Div editorLayoutDiv = new Div();
-        editorLayoutDiv.setClassName("flex flex-col");
         editorLayoutDiv.setWidth(400, Unit.PIXELS);
         editorLayoutDiv.setHeight(520, Unit.PIXELS);
 
@@ -199,7 +198,6 @@ public class CheckInView extends Div implements BeforeEnterObserver {
 
     private void createGridLayout(SplitLayout splitLayout) {
         Div wrapper = new Div();
-        wrapper.setId("grid-wrapper");
         wrapper.setWidthFull();
         splitLayout.addToPrimary(wrapper);
         wrapper.add(grid);
