@@ -1,6 +1,5 @@
 package com.serdarsenturk.moonstarbooking.views.main;
 
-import com.serdarsenturk.moonstarbooking.views.about.AboutView;
 import com.serdarsenturk.moonstarbooking.views.admin_login.AdminLoginView;
 import com.serdarsenturk.moonstarbooking.views.home.HomeView;
 import java.util.Optional;
@@ -77,8 +76,7 @@ public class MainView extends AppLayout {
         private static Tab[] getAvailableTabs() {
             return new Tab[]{
                     createTab("Home", HomeView.class),
-                    createTab("Admin", AdminLoginView.class),
-                    createTab("About", AboutView.class)
+                    createTab("Admin", AdminLoginView.class)
             };
         }
 
