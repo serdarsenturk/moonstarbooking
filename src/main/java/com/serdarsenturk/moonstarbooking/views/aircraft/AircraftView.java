@@ -150,12 +150,10 @@ public class AircraftView extends Div implements BeforeEnterObserver {
 
     private void createEditorLayout(SplitLayout splitLayout) {
         Div editorLayoutDiv = new Div();
-        editorLayoutDiv.setClassName("flex flex-col");
         editorLayoutDiv.setWidth(400, Unit.PIXELS);
         editorLayoutDiv.setHeight(520, Unit.PIXELS);
 
         Div editorDiv = new Div();
-        editorDiv.setClassName("p-l flex-grow");
         editorLayoutDiv.add(editorDiv);
 
         FormLayout formLayout = new FormLayout();
@@ -182,7 +180,6 @@ public class AircraftView extends Div implements BeforeEnterObserver {
 
     private void createButtonLayout(Div editorLayoutDiv) {
         HorizontalLayout buttonLayout = new HorizontalLayout();
-        buttonLayout.setClassName("w-full flex-wrap bg-contrast-5 py-s px-l");
         buttonLayout.setSpacing(true);
         cancel.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
         save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
@@ -193,7 +190,6 @@ public class AircraftView extends Div implements BeforeEnterObserver {
 
     private void createGridLayout(SplitLayout splitLayout) {
         Div wrapper = new Div();
-        wrapper.setId("grid-wrapper");
         wrapper.setWidthFull();
         splitLayout.addToPrimary(wrapper);
         wrapper.add(grid);
