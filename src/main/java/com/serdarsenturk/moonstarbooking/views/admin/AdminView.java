@@ -6,12 +6,12 @@ import com.serdarsenturk.moonstarbooking.views.checkIn.CheckInView;
 import com.serdarsenturk.moonstarbooking.views.company.CompanyView;
 import com.serdarsenturk.moonstarbooking.views.flight.FlightView;
 import com.serdarsenturk.moonstarbooking.views.home.HomeView;
-import com.serdarsenturk.moonstarbooking.views.main.MainView;
 import com.serdarsenturk.moonstarbooking.views.passenger.PassengerView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentUtil;
 import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.applayout.AppLayout;
+import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.H5;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
@@ -59,6 +59,10 @@ public class AdminView extends AppLayout {
         header.add(logo);
 
         header.add(new H5("Moonstar Booking"));
+
+        Anchor login = new Anchor("", "Logout");
+        login.setClassName("menu-link");
+        header.add(login);
 
         return header;
     }
