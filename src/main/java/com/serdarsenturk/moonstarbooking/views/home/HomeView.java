@@ -169,23 +169,23 @@ public class HomeView extends Div {
     private Component createFormLayout() {
         FormLayout formLayout = new FormLayout();
 
-        fromAirport.setWidth(50, Unit.PIXELS);
+        fromAirport.setWidth(30, Unit.PIXELS);
         fromAirport.setItems(repository.findAll());
         fromAirport.setItemLabelGenerator(Airport::getName);
 
-        toAirport.setWidth("50%");
+        toAirport.setWidth(30, Unit.PIXELS);
         toAirport.setItems(repository.findAll());
         toAirport.setItemLabelGenerator(Airport::getName);
 
         date.setWidth("50%");
 
         formLayout.add(fromAirport, toAirport, date);
+
         return formLayout;
     }
 
     private Component createButtonLayout() {
         HorizontalLayout buttonLayout = new HorizontalLayout();
-        buttonLayout.addClassName("button-layout");
         search.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         buttonLayout.add(search);
         return buttonLayout;
@@ -193,7 +193,6 @@ public class HomeView extends Div {
 
     private void createGridLayout(SplitLayout splitLayout) {
         Div wrapper = new Div();
-        wrapper.setId("grid-wrapper");
         wrapper.setWidthFull();
         splitLayout.addToPrimary(wrapper);
         wrapper.add(grid);
