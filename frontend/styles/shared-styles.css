@@ -16,7 +16,7 @@
     }
 }
 
-.main-layout {
+.main-view {
     flex-direction: row;
 
     /* Used by the menu and form overlays */
@@ -31,7 +31,8 @@
 }
 
 .menu-header {
-    padding: 11px 16px;
+    padding: 3px 10px;
+    margin: fill;
 }
 
 .menu-bar vaadin-tabs {
@@ -44,8 +45,11 @@
 }
 
 .menu-link {
-    margin: 0 auto;
-    padding: 10px 37px;
+    margin: 15px;
+    padding: 10px 1000px;
+    transform: translateX(calc(-100% - var(--top-bar-margin)));
+    box-shadow: var(--overlay-box-shadow);
+    color: blueviolet;
 }
 
 .menu-link > span {
@@ -56,23 +60,13 @@
     display: none;
 }
 
-.product-form {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    height: 100%;
-    overflow: auto;
-    background: var(--lumo-base-color);
-    box-shadow: var(--overlay-box-shadow);
-}
-
 /* On narrow screens, move the side bar to the top,
  * except for the link-tabs, which are hidden but
  * can be opened via a button.
  */
 @media (max-width: 800px) {
 
-    .main-layout {
+    .main-view {
         flex-direction: column;
         --top-bar-height: 50px;
         --top-bar-margin: 5vw;
