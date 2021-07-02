@@ -41,7 +41,7 @@ import java.util.Optional;
 public class CheckInView extends Div implements BeforeEnterObserver {
 
     private final String CHECKIN_ID = "checkInID";
-    private final String CHECKIN_EDIT_ROUTE_TEMPLATE = "checkins/%d/edit";
+    private final String CHECKIN_EDIT_ROUTE_TEMPLATE = "admin/checkins/%d/edit";
 
     Grid<CheckIn> grid = new Grid<>(CheckIn.class, false);
 
