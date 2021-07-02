@@ -207,6 +207,5 @@ public class AircraftView extends Div implements BeforeEnterObserver {
     private void populateForm(Aircraft value) {
         this.aircraft = value;
         binder.readBean(this.aircraft);
-
     }
 }
