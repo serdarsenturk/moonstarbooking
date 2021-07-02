@@ -45,7 +45,7 @@ import java.util.Optional;
 public class FlightView extends Div implements BeforeEnterObserver {
 
     private final String FLIGHT_ID = "flightID";
-    private final String FLIGHT_EDIT_ROUTE_TEMPLATE = "flights/%d/edit";
+    private final String FLIGHT_EDIT_ROUTE_TEMPLATE = "admin/flights/%d/edit";
 
     Grid<Flight> grid = new Grid<>(Flight.class, false);
 
